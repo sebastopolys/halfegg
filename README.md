@@ -29,6 +29,7 @@ Una vez el usuario es registrado desde el BACK END, ya no es posible acceder al 
 ### 1.2 FRONT END: El sitio web en sí mismo, en donde la capa externa serían las páginas públicas. Y el núcleo interno solo accesible para los usuarios registrados, bloqueado para los usuarios no registrados.
 
 ### 1.3 BACK END:  El sistema de registro de usuarios, es decir, la página de activación de cuenta. Esto representa la capa externa del medio huevo. Mientras que la parte oculta sería el panel de administración, desde donde el admin/webmaster puede crear las licencias y realizar otras operaciones reservadas solo para el administrador.
+
 ![This is an image](https://myoctocat.com/assets/images/base-octocat.svg)
 
    Front End                    Back End
@@ -53,8 +54,7 @@ users, licencias y options
 
 ### 2.1.1 Tablas
 
-
-#### 2.1.1.1 Tabla USERS - columnas
+2.1.1.1 Tabla USERS - columnas
 
 INSERT INTO `users` (
 `id`, 
@@ -70,7 +70,7 @@ INSERT INTO `users` (
 
 
 
-#### 2.1.1.2 Tabla LICENCIAS - columnas
+2.1.1.2 Tabla LICENCIAS - columnas
 
 
 INSERT INTO `licencias` (
@@ -81,7 +81,7 @@ INSERT INTO `licencias` (
 )
 
 
-#### 2.1.1.3 Tabla options - No es necesario crear está tabla para la configuración inicial
+2.1.1.3 Tabla options - No es necesario crear está tabla para la configuración inicial
 
 ### 2.1.2 Crear admin
 
