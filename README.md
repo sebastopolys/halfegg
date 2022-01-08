@@ -154,24 +154,24 @@ README.md
 
 
 
-3_ Funcionamiento
+## 3_ Funcionamiento
 
 
 
 
-3.1 Antes de empezar
-3.2 Acceso a panel administrador
-3.3 Registro de usuarios 
-3.4 Sistema de licencias 
-3.5 Páginas reservadas a usuarios registrados
-3.6 Sitio Web 
+### 3.1 Antes de empezar
+### 3.2 Acceso a panel administrador
+### 3.3 Registro de usuarios 
+### 3.4 Sistema de licencias 
+### 3.5 Páginas reservadas a usuarios registrados
+### 3.6 Sitio Web 
 
 
 
-4_ LOG
+## 4_ LOG
 
 
-4.1_ Versiones
+### 4.1_ Versiones
 
 halfegg-0.0.2
 Sistema de LOGIN LOGOUT mediante variable de sesion
@@ -185,22 +185,22 @@ pagina de redirección si el usuario tiene licencia activa
 dashboard de admin
 boton de logout
 
-4.2_ Desarrollo
-4.2.1 _ En curso
+### 4.2_ Desarrollo
+**4.2.1 _ En curso**
 
 halfegg-0.0.4
 Agregar hash a base de datos y validar con hash de sesion
-4.2.2 _ En la lista
+**4.2.2 _ En la lista**
 
 halfegg-0.0.4
 Agregar hash a base de datos y validar con hash de sesion
 
-4.2.3 _ Bugs
+**4.2.3 _ Bugs**
 
 
 
 
-5_ FAQ
+### 5_ FAQ
 
 
 
