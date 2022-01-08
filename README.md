@@ -5,8 +5,7 @@ Half Egg ~ Complete user registration & licensing system
 Este sistema permite crear licencias desde un panel de administrador, lo que genera un enlace que el usuario/cliente usará posteriormente para registrar su cuenta, activar su licencia y tener acceso a la sección reservada para usuarios registrados en el sitio web.
 
 
-
-!  Este software está en etapa de desarrollo y no ha sido probado en producción todavía, espero que puedas involucrarte con el proyecto y aportar tus conocimientos.
+> :warning: Este software está en etapa de desarrollo y no ha sido probado en producción todavía, espero que puedas involucrarte con el proyecto y aportar tus conocimientos.
 
 
 
