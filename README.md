@@ -12,9 +12,9 @@ Este sistema permite crear licencias desde un panel de administrador, lo que gen
 
 
 
-1_ Los dos “medios huevos” de halfegg:
+## 1_ Los dos “medios huevos” de halfegg:
 
-1.1 Descripción
+### 1.1 Descripción
 
 El nombre “halfegg” (medio huevo) hace referencia a que el sistema se divide en dos partes, cada una de estas a la vez tiene una parte oculta en su interior.
 
@@ -26,10 +26,10 @@ De está forma, el sistema de registro de usuarios/panel de administrador se enc
 
 Una vez el usuario es registrado desde el BACK END, ya no es posible acceder al mismo, siendo redireccionado al FRONT END.
 
-1.2 FRONT END: El sitio web en sí mismo, en donde la capa externa serían las páginas públicas. Y el núcleo interno solo accesible para los usuarios registrados, bloqueado para los usuarios no registrados.
+### 1.2 FRONT END: El sitio web en sí mismo, en donde la capa externa serían las páginas públicas. Y el núcleo interno solo accesible para los usuarios registrados, bloqueado para los usuarios no registrados.
 
-1.3 BACK END:  El sistema de registro de usuarios, es decir, la página de activación de cuenta. Esto representa la capa externa del medio huevo. Mientras que la parte oculta sería el panel de administración, desde donde el admin/webmaster puede crear las licencias y realizar otras operaciones reservadas solo para el administrador.
-
+### 1.3 BACK END:  El sistema de registro de usuarios, es decir, la página de activación de cuenta. Esto representa la capa externa del medio huevo. Mientras que la parte oculta sería el panel de administración, desde donde el admin/webmaster puede crear las licencias y realizar otras operaciones reservadas solo para el administrador.
+![This is an image](https://myoctocat.com/assets/images/base-octocat.svg)
 
    Front End                    Back End
     https://halfegg.com                     https://halfegg.com/intralog.php
@@ -39,9 +39,9 @@ Una vez el usuario es registrado desde el BACK END, ya no es posible acceder al 
 
 
 
-2_ Configuración Inicial
+## 2_ Configuración Inicial
 
-2.1 Base de Datos
+### 2.1 Base de Datos
 
 Para poner el sistema en funcionamiento, es necesario crear una base de datos MySQL, recomiendo usar phpMyadmin para crear la base de datos, viene integrado con todos los servidores locales. 
 
@@ -51,10 +51,10 @@ Está base de datos tendra tendra 3 tablas:
 
 users, licencias y options
 
-2.1.1 Tablas
+### 2.1.1 Tablas
 
 
-2.1.1.1 Tabla USERS - columnas
+#### 2.1.1.1 Tabla USERS - columnas
 
 INSERT INTO `users` (
 `id`, 
@@ -70,7 +70,7 @@ INSERT INTO `users` (
 
 
 
-2.1.1.2 Tabla LICENCIAS - columnas
+#### 2.1.1.2 Tabla LICENCIAS - columnas
 
 
 INSERT INTO `licencias` (
@@ -81,9 +81,9 @@ INSERT INTO `licencias` (
 )
 
 
-2.1.1.3 Tabla options - No es necesario crear está tabla para la configuración inicial
+#### 2.1.1.3 Tabla options - No es necesario crear está tabla para la configuración inicial
 
-2.1.2 Crear admin
+### 2.1.2 Crear admin
 
 Tabla user, crear registro: 
 $string = “tuNombre”,$email=”tuEmail”,$pasword=”tuContraseña”
@@ -105,20 +105,20 @@ Tabla Licencias. crear registro
 `last_action=TIMESTAMP`
 
 
-2.2 Tipos de usuarios:
+## 2.2 Tipos de usuarios:
 
-2.2.1 Admin
-2.2.2 Usuario no registrado
-2.2.3 Usuario registrado
-2.2.4 Tipo de licencia
+### 2.2.1 Admin
+### 2.2.2 Usuario no registrado
+### 2.2.3 Usuario registrado
+### 2.2.4 Tipo de licencia
 
-2.3 Archivos
+## 2.3 Archivos
 
-2.2.1 Instalación en servidor
-2.2.2 Conectar con la base de datos
+### 2.2.1 Instalación en servidor
+### 2.2.2 Conectar con la base de datos
 
 
-2.4 Mapa de archivos:
+## 2.4 Mapa de archivos:
 
 
 __log
