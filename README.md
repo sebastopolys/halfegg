@@ -34,7 +34,7 @@ El sitio web en sí mismo, en donde la capa externa serían las páginas públic
 
 El sistema de registro de usuarios, es decir, la página de activación de cuenta. Esto representa la capa externa del medio huevo. Mientras que la parte oculta sería el panel de administración, desde donde el admin/webmaster puede crear las licencias y realizar otras operaciones reservadas solo para el administrador.
 
-![This is an image](https://myoctocat.com/assets/images/base-octocat.svg)
+![This is an image](halfegg-doc.png)
 
    Front End                    Back End
     https://halfegg.com                     https://halfegg.com/intralog.php
