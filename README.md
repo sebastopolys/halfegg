@@ -110,8 +110,8 @@ Tabla Licencias. crear registro
 
 ## 2.3 Archivos
 
-### 2.2.1 Instalación en servidor
-### 2.2.2 Conectar con la base de datos
+### 2.3.1 Instalación en servidor
+### 2.3.2 Conectar con la base de datos
 
 
 ## 2.4 Mapa de archivos:
