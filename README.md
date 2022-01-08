@@ -20,15 +20,18 @@ El nombre “halfegg” (medio huevo) hace referencia a que el sistema se divide
 
 Las dos capas de cada medio huevo están aseguradas mediante una cadena de validaciones que toman valores desde la base de datos y desde variables de sesión a la vez que mediante parámetros de la URL, combinando en una fuerte y sólida validación de usuario.
 
-Al mismo tiempo, cada uno de los “medios huevos” se alojan en distintas urls, la parte del FRONT END está en el http://dominio.com/index.php, mientras que la parte BACK END se encuentra en otra url diferente, http://dominio.com/intralog.php
+Al mismo tiempo, cada uno de los “medios huevos” se alojan en distintas urls, la parte del FRONT END está en el `http://dominio.com/index.php`, mientras que la parte BACK END se encuentra en otra url diferente, `http://dominio.com/intralog.php`
 
 De está forma, el sistema de registro de usuarios/panel de administrador se encuentran totalmente separados del sitio web en sí mismo. 
 
 Una vez el usuario es registrado desde el BACK END, ya no es posible acceder al mismo, siendo redireccionado al FRONT END.
+
 ### 1.2 FRONT END: 
+
 El sitio web en sí mismo, en donde la capa externa serían las páginas públicas. Y el núcleo interno solo accesible para los usuarios registrados, bloqueado para los usuarios no registrados.
 
 ### 1.3 BACK END:  
+
 El sistema de registro de usuarios, es decir, la página de activación de cuenta. Esto representa la capa externa del medio huevo. Mientras que la parte oculta sería el panel de administración, desde donde el admin/webmaster puede crear las licencias y realizar otras operaciones reservadas solo para el administrador.
 
 ![This is an image](https://myoctocat.com/assets/images/base-octocat.svg)
