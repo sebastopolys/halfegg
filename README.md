@@ -36,14 +36,6 @@ El sistema de registro de usuarios, es decir, la página de activación de cuent
 
 ![This is an image](halfegg-doc.png)
 
-   Front End                    Back End
-    https://halfegg.com                     https://halfegg.com/intralog.php
-
-
-
-
-
-
 ## 2_ Configuración Inicial
 
 ### 2.1 Base de Datos
