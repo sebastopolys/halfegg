@@ -1,0 +1,29 @@
+{
+    "name": "sebastopolys/halfegg",
+	"type": "application",
+	"license": "GPL-2.0-only",
+	"description": "A customer portal - backend system",
+	"homepage": "https://github.com/sebastopolys/apiusers",
+	"authors": [
+		{
+			"name": "Sebastian Rossi",
+			"email": "sebastopolys@gmail.com",
+			"homepage": "https://github.com/sebastopolys"
+		}
+	],
+	"config": {
+		"platform": {
+			"php": "8.1"
+		},
+		"optimize-autoloader": true,
+        "allow-plugins": {
+            "composer/installers": true
+        }
+	},
+    "autoload": {
+        "psr-4": {
+			"Halfegg\\": "src/"
+		},
+    "require": {}
+    }
+}

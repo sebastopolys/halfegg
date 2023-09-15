@@ -1,0 +1,156 @@
+<?php
+namespace Halfegg\mods;
+
+use Halfegg\incs\modMain;
+
+class useThisMod{
+
+    /**
+     * User Id
+     */
+    private static $_usid = NULL;
+
+    /**
+     * User Role
+     */
+    private static $_usrol = NULL;
+    /**
+     * Database Conection
+     */
+    private static $_dbmod = NULL;
+
+   
+    private static $_mod = NULL;     
+
+    public function __construct($user_id){
+        if(self::$_usid===NULL){
+            self::$_usid = $user_id['id'];
+        }
+        if(self::$_usrol===NULL){
+            self::$_usrol = $user_id['role'];
+        }
+        if(self::$_dbmod===NULL){
+            self::$_dbmod = new modMain();
+        }
+        if(self::$_mod===NULL){
+             self::$_mod = require_once('presets/'.CURRMOD);   
+                   
+        }
+     
+    }
+
+    public function printProfile(){
+
+        // get user meta 
+        if(self::$_dbmod){
+            //  get meta user data from database
+            $result =  self::$_dbmod->get_relations('meta_id',USMTRL,['user_id'=>self::$_usid,'type'=>'profile']);
+        
+            // get array of data ($return)
+            $return = [];
+            foreach ($result as $k => $v) {
+                $return[$v['label']]=$v['value'];                
+            }
+            // no meta user data
+            if(!$return){return " ";}
+            
+            // default avatar
+            if(array_key_exists('gender',$return)){
+                $image= '<div><img src="'.MANPATH.'/'.BASPATH.'/assets/images/'.$this->profileImage($return['gender']) .'"></div>';
+            } else {
+                $image= '<div><img src="'.MANPATH.'/'.BASPATH.'/assets/images/'.$this->profileImage('X') .'"></div>';
+            }
+
+            // inputs
+            $output ='<input id="userid" name="userid" type="hidden" value="'.self::$_usid.'"/>';      
+           // $output = '';     
+            foreach (self::$_mod as $k => $v) {  
+                // no database register for this label
+                if(empty($return[$v[0]])){
+                   
+                    $output.= '<p><span class="profile-label">'.$v[1].': </span>';
+                    if(self::$_usrol==4){
+                        $output .= $this->profileInputs($v[2],$v[0],null,$v[3]).'This meta is not registered</p>';
+                    }
+                } else {
+                    $output.= '<p><span class="profile-label">'.$v[1].': <span class="prof-data">'.$return[$v[0]].'</span></span>';
+                    if(self::$_usrol==4){
+                        $output .= $this->profileInputs($v[2],$v[0],$return[$v[0]],$v[3]).'</p>';
+                    }
+
+                }
+                
+            }          
+            $output .= '</form>';
+            return [$image,$output];
+
+        }
+
+        return 'ERROR';
+
+    }
+
+    public function createUserMeta(){
+
+        $img= '<div><img src="'.MANPATH.'/'.BASPATH.'/assets/images/defaultfemale.png"></div>';
+        $out ='';      
+        // $output = '';     
+         foreach (self::$_mod as $k => $v) {  
+               
+                 $out.= '<p><span class="create-profile">'.$v[1].': </span>'.$this->profileInputs($v[2],$v[0],'',$v[3]).'</p>';
+             
+         }          
+         $out .= '</form>';
+         return [$img,$out];
+    }
+
+    public function profileImage($gend){
+        
+            if($gend=='M'){
+                $ret = 'defaultmale.png';
+            } else {
+                $ret = 'defaultfemale.png';
+            }
+ 
+        return $ret;
+
+    }
+
+    private function profileInputs($type,$name,$placeholder,$options){
+
+        $pr_inp = '<span class="profile-input">';
+
+        if($type==='text'||$type==='number'||$type==='date'){
+            $pr_inp .= '<input type="'.$type.'" name="'.$name.'" id="pr_input_'.$name.'" value="'.$placeholder.'" placeholder="'.$placeholder.'">';
+        }
+
+        if($type==='radio'&&$options!==NULL&&is_array($options)){
+            $o=0;
+           
+            foreach ($options as $option) {
+                if($placeholder==$option){$select = 'checked=""';} else{$select='';}
+                $pr_inp .= '<input type="'.$type.'"'.$select.' name="'.$name.'" value="'.$option.'" id="inp-'.$name.'_'.$o.'" class="pr_input_'.$name.'"><label for="inp-'.$name.'_'.$o.'">'.$option.'</label>';
+                $o++;
+            }
+            if(empty($placeholder)){$selected = 'checked=""';} else{$selected='';}
+            $pr_inp .= '<input id="default-radio-button" type="'.$type.'"'.$selected.' name="'.$name.'" value="UN" id="inp-'.$name.'_'.$o.'" class="pr_input_'.$name.'">';
+
+            $options = [];
+        }
+
+        if($type==='select'&&$options!==NULL&&is_array($options)){
+            $pr_inp .= '<select name="'.$name.'" id="inp-'.$name.'" class="pr_input_'.$name.'">';
+            foreach ($options as $option) {
+                $pr_inp .= '<option  value="'.$option.'"';
+                if($option==$placeholder){
+                    $pr_inp .=' selected '; 
+                }
+                $pr_inp .= '>'.$option.'</option>';
+            }
+            $pr_inp .='</select>';
+            $options = [];
+        }
+
+        return $pr_inp.'</span>';
+    }
+}

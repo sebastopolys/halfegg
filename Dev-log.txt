@@ -1,0 +1,24 @@
+
+
+* * *    T O  D O     * * *
+
+- Use hash from session variable, to validate it with database user table
+
+
+* * *  B U G   L O G  * * *
+
+bug 101 ;
+    Registration of multiple users with same registration link.
+    Halfegg\admin\log\adminLog; L:66
+    FIXED;
+ 
+bug 102 : 
+    users cannot use same password
+    Halfegg\admin\log\adminLog; L:100
+
+ 
+
+bug 104 : 
+    Duplicated email on user creation returns error
+
+

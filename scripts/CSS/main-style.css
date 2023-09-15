@@ -1,0 +1,470 @@
+*{margin:1px;padding:1px;}
+
+body > nav:nth-child(1) > ul:nth-child(1) li{
+    display:inline;
+}
+
+html, 
+body {
+    height: 99%;
+    font-family:arial;
+}
+h1{
+    font-size:48px;
+}
+h2{
+    font-size:30px;
+}
+h3{
+    font-size:30px;
+    font-weight:lighter;
+}
+h4{
+    font-size:25px;
+}
+h5{
+    font-size:25px;
+    font-weight:lighter;
+}
+h6{
+    font-size:20px;
+}
+
+ul{
+    list-style: none;
+}
+
+
+/* FRONT END MENU BAR  */
+/* UL */
+#front-menubar{
+    width:75%;
+    text-align: center; 
+    margin:0 auto 0;
+}
+
+/* TABS */
+
+#front-menubar li{
+    display: inline-flex;
+    padding: 15px 17px 15px 17px;
+    
+}
+/* TABS HOVER */
+#front-menubar li:hover{
+    background-color:darkgrey;
+    color:white;   
+    cursor: pointer;    
+    border-radius: 10px;
+}
+/* Login dropdown ~ hidden by default */
+#login-dropdown.dropdown-container{
+    display:none;
+
+    width: 287px;
+    position: absolute;
+    background: rgb(148, 148, 148);
+    padding: 15px;   
+    left: 55%;
+
+}
+/* JS adds 'open' class */
+#login-dropdown.dropdown-container.open{
+    display:block;
+}
+
+/* QR Code creator form inputs */
+span.qr-input{
+display: block;
+}
+
+#qr-kjua canvas{display:none;}
+
+#qr-kjua canvas:last-child{
+display:block;
+}
+
+/* Home page */ 
+
+
+main{
+    height:90%;
+    width: 90%;
+    margin: 25px auto;
+}
+#qrgo-feat div.col{
+    margin:7px 0 4px 0;  
+}
+#main-tit{
+    text-align:center;
+    margin-bottom: 30px;
+
+}
+.row{
+    margin-bottom:20px;
+}
+#row-1 .col,
+#row-2 .col{
+    display: inline-block;
+    width: 31%;
+    margin-left:1%;
+    margin-right: 1%;
+    text-align:center;
+    
+   
+}
+#row-1 .col img,
+#row-2 .col img{
+    width:100px;
+    height:100px;
+    margin-bottom: 11px;
+}
+#row-1 .col h6,
+#row-2 .col h6{
+    margin-bottom: 10px;
+}
+#row-1 .col p,
+#row-2 .col p{
+    width:350px;
+    margin: 0 auto;
+}
+
+
+
+#row-3{
+    margin-top:3%;
+}
+
+/* License page */
+div.container{
+    width: 80%;
+    text-align: center;
+    margin:0 auto;
+}
+div.container div{
+    width: 19%;
+    display: inline-block;
+}
+div.container div ul li{
+    list-style: none;
+}
+
+/* login  */
+/* qr code creatore */
+
+#qr-creatore #qr-creator,#qr-creatore #qr-result{
+    width:49%;
+    display: inline-block;
+}
+#qr-creatore #qr-result{
+    vertical-align: top;
+    margin-top: 30px;
+}
+#sh-web{
+    display:none;
+    padding-top: 10px;
+    min-height:50px;
+   
+}
+#ex-web{
+    min-height:50px;
+    padding-top: 10px;
+    display: block;
+}
+
+
+
+/* Mode type: plain | image | label */
+.q-button{
+    width:15%;
+    height: 33px;
+}
+.q-selected{
+    background-color:rgb(179, 179, 179); 
+    width:15%;
+    height: 33px;
+}
+#qt-lab,#qt-image,#q-type{
+    display:none;
+}
+/* attachment */
+#reset-xy{
+    border:solid 1px gray;
+    max-width:400px;
+}
+
+
+/* dashboard MY QR CODES tables */
+#qrc-table{
+    width:550px;
+    margin-left:100px;
+}
+#qrc-table tbody tr {
+    height:28px;
+}
+#qrc-table tbody tr td{
+    text-align:center;
+}
+#qrc-table tbody tr:nth-child(1){
+    background-color: slategrey;
+}
+#qrc-table tbody tr:nth-child(2n+3){
+    background-color: silver;
+}
+
+#hw-table{
+    width:550px;
+    margin-left:100px;
+}
+#hw-table tbody tr {
+    height:28px;
+}
+#hw-table tbody tr td{
+    text-align:center;
+}
+#hw-table tbody tr:nth-child(1){
+    background-color: slategrey;
+}
+#hw-table tbody tr:nth-child(2n+3){
+    background-color: silver;
+}
+
+
+/* FOOTER */
+#foot-cont p{
+    text-align:center;
+}
+
+
+
+
+/* INTRALOG */
+
+#con{
+    background-color: gray;
+}
+
+.form-it{
+    display: block;
+}
+
+
+body > section {
+    margin: 150px auto;
+    width: 80%;
+    text-align: center;
+}
+
+span.form-it {
+  
+    width: 35%;
+    margin: auto;
+}
+
+span.form-it label{
+
+    width: 35%;
+    display: inline-block;
+    text-align: initial;
+
+}
+
+.fail-pop
+     {
+
+
+    position: absolute;
+    width: 30%;
+    left: 25%;
+    right: 25%;
+    margin: auto;
+    text-align: center;
+     height: 45px; 
+     background-color: #d53b3b; 
+    bottom: 40%;
+    font-size: 25px;
+    font-style: italic;
+    font-weight: bold;
+    color: #ffeaea;
+     top: 60%;
+}
+
+.fail-pop.redirect{
+    height: 90px; 
+}
+
+.fail-pop p
+{
+    margin-top:1.3%;
+}
+.fail-pop:hover{
+    cursor:default;
+}
+
+
+
+span.form-it:nth-child(4) > i:nth-child(3){
+
+    display: block;
+    font-size: 12px;
+    margin-top: 18px;
+}
+
+#log-submit{
+    width: 80%;
+    background-color: gold;
+    margin-top: 10px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+#log-submit:hover{
+    background-color: #ffe975;
+    cursor:pointer;
+}
+
+body > section:nth-child(1) > h2:nth-child(1){
+    font-weight: lighter;
+    font-style: oblique;
+    text-decoration: underline;
+    margin-bottom: 14px;
+    color: #60606a;
+
+}
+body > section:nth-child(1) > h2:nth-child(1):hover{
+    cursor:default;
+}
+span.form-it:nth-child(4) > i:nth-child(3) > mark:nth-child(1){
+    font-size: 12px;
+    border: 1px solid gold;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+#il-warn{
+        width: 50%;
+        margin: auto;
+        top: 250px;
+        position: relative;
+
+}
+
+#il-warn > div:nth-child(1) > span:nth-child(1) > code:nth-child(1){
+    line-height: 30px;
+    font-size: 20px;
+}
+#il-warn > div:nth-child(1) > span:nth-child(1) > span:nth-child(2){
+    position: relative;
+    top: 30px;
+}
+#psxil-log{
+    margin-left: 22px;
+    width: 180px;
+}
+
+#cont > header:nth-child(1){
+    height: 120px;
+    background-color: rgb(213, 228, 244);
+    display: block;
+    width: 100%;
+}
+
+#intralog-nav{
+    width: 15%;
+    display: inline-block;
+    min-height: 715px;
+    background-color: rgb(213, 228, 244);
+    padding: 5px;
+}
+#m-content{
+    width: 84%;
+    float: right;
+    background-color:rgb(213, 228, 244);
+    height: 715px;
+}
+
+#cont{
+
+    margin: 20px;
+
+    background-color: darkgrey;
+
+}
+
+#intralog-nav > ul:nth-child(1){
+     border: 2px solid white;
+     padding:4px;
+}
+#intralog-nav > ul:nth-child(1) li{
+    list-style: none;
+    padding: 10px;
+    border: 2px solid white;
+    margin-bottom:4px;
+}
+#intralog-nav > ul:nth-child(1)  li:last-child{
+    margin-bottom:2px;
+
+}
+
+
+#intralog-nav > ul:nth-child(1) li:hover{
+    background-color: yellow;
+    border: 2px solid red;
+    cursor: pointer;
+   
+}
+
+#intralog-nav > ul:nth-child(1) li > button{
+  
+    padding:5px 17px 5px 17px;
+    border:solid white 1px;
+    border-radius: 5px;
+   
+}
+
+
+#intralog-nav > ul:nth-child(1) li > button:hover{
+    background-color:#fffbc9;
+    padding:5px 17px 5px 17px;
+    border:solid blue 1px;
+    border-radius: 5px;
+   
+}
+
+#m-content > ul:nth-child(1) form > li{
+    width: 10%;
+    display: inline-block;
+    text-align: center;
+}
+#m-content > ul:nth-child(1) form > li:last-child{
+    float:right;
+}
+
+#m-content > ul:nth-child(1) {
+    text-align: center;
+    border: 2px solid #430fff;
+    padding: 10px;
+    background-color: blueviolet;
+}
+#m-content > ul:nth-child(1) form > li > input:nth-child(1):hover{
+    background-color: rgb(221, 221, 217);
+}
+
+#js-hand div.il-content{
+    display:none;
+}
+#js-hand div.il-content.active{
+    display:block;
+}
+
+
+/* ADD QUERY BUTTON */
+.add-query{
+    
+    width: 140px;
+    height: 60px;
+    margin: 36px auto auto 36px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
