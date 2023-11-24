@@ -15,7 +15,7 @@ class modDatabase{    //https://www.php.net/manual/en/pdo.prepared-statements.ph
     public function __construct(){
         try {
 			$dsn = "mysql:host=$this->_host;dbname=$this->_name";
-			$dbh = new PDO($dsn, 'root',''); // user & pasword
+			$dbh = new PDO($dsn, DBUSER,DBPASS ); // user & pasword
 		} catch (PDOException $poet){
 			$poet->getMessage();
         }
@@ -41,7 +41,7 @@ public function ddbb_query($tr,$tb,$pt,$qr){
 # # # # # # # # #     P A G I N A T I O N   Q U E R Y    # # # # # # #
 
 public function pag_ddbb_query($tr,$tb,$offset,$limit){
-    $see = "SELECT $tr FROM $tb LIMIT 0,3;";
+    $see = "SELECT $tr FROM $tb LIMIT $offset,$limit;";
     return self::query_build_a($see);  
 }
 
@@ -93,9 +93,9 @@ public function ddbb_ins($mail,$tmp){
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # # # # # # # # # # - - - > UPDATE USER  < - - -  # # # # # # # # # # # # # #
-public function ddbb_upd($nm,$ps,$id){    
+public function ddbb_upd($nm,$ps,$id,$roles){    
     $tab =USERTB;
-        $see="UPDATE `$tab` SET `username`='$nm',`password`='$ps',`role`='1' WHERE `$tab`.`id` = '$id'; ";
+        $see="UPDATE `$tab` SET `username`='$nm',`password`='$ps',`role`='$roles' WHERE `$tab`.`id` = '$id'; ";
         self::query_build_s($see);  
   
      

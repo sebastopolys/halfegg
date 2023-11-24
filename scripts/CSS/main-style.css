@@ -1,4 +1,6 @@
-*{margin:1px;padding:1px;}
+*{
+    margin:1px;padding:1px;    
+}
 
 body > nav:nth-child(1) > ul:nth-child(1) li{
     display:inline;
@@ -269,6 +271,14 @@ span.form-it label{
 
 }
 
+#user_forms, .hideme{
+    display:none;
+}
+ 
+div.tox-promotion,
+span.tox-statusbar__branding{
+    display:none;
+}
 .fail-pop
      {
 

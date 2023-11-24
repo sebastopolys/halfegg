@@ -3,13 +3,13 @@ namespace Halfegg\incs;
 
 use Halfegg\admin\templates\adminBackendRegister;
 use Halfegg\admin\templates\adminBackendUsers;
-use Halfegg\admin\templates\adminBackendLicences;
+use Halfegg\admin\templates\adminBackendItems;
 
 class adminBackendToggle{
     private $_bckpage=NULL;
     private static $_admusr = NULL;
     private static $_admreg = NULL;
-    private static $_admlic = NULL;
+    private static $_admits = NULL;
 
     public $_html=NULL;
 
@@ -21,8 +21,8 @@ class adminBackendToggle{
         if(self::$_admreg==NULL){
             self::$_admreg = new adminBackendRegister(); 
         }
-        if(self::$_admlic==NULL){
-            self::$_admlic = new adminBackendLicences(); 
+        if(self::$_admits==NULL){
+            self::$_admits = new adminBackendItems(); 
         }       
          
         
@@ -57,8 +57,8 @@ class adminBackendToggle{
     }
 
     private function admin_licences($usrs){        
-        $this->_html = self::$_admreg->back_admin_register($usrs,$this->_bckpage);     
-        $this->_html .= self::$_admlic->back_admin_licenses();   
+       // $this->_html = self::$_admreg->back_admin_register($usrs,$this->_bckpage);     
+        $this->_html = self::$_admits->back_admin_items($usrs);   
         return $this->_html;
     }
 

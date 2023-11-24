@@ -12,12 +12,13 @@ class modMain{
         self::$_mod = new modDatabase();
         }
         //$us_c=new modDatabase();   
-        
+       
         # login    
         if(# front end form validation 
         isset($_POST['user_f'])&&$_POST['user_f']
         &&isset($_POST['psw_f'])&&$_POST['psw_f']
-        &&isset($_POST['submit_f'])){       
+        &&isset($_POST['submit_f'])){      
+            
             # incs/class-mod_db.php
             // try to Get name from DB
             $us_row=self::$_mod->ddbb_query('*',USERTB,'username',$_POST["user_f"]);  
@@ -71,7 +72,7 @@ class modMain{
 
     public function  val_users(){
 
-        $us_ers=self::$_mod->pag_ddbb_query('*',USERTB,0,3);
+        $us_ers=self::$_mod->pag_ddbb_query('*',USERTB,0,35);
 
         $users = [];
         
@@ -119,10 +120,11 @@ class modMain{
         $gt_rrl = self::$_mod->ddbb_relation($target,$tab,$were);
         if(is_array($gt_rrl)){
             $return_rels = [];
-            if($tab==USMTRL){$newtab = MTUSTB;}
+            if($tab==USMTRL){$newtab = MTUSTB;$vall = 'meta';}
+            if($tab==USITRL){$newtab = ITEMTB;$vall = 'item';}
             foreach ($gt_rrl as $key => $value) {
                 
-                array_push($return_rels,self::$_mod->ddbb_query('*',$newtab,'id',$value['meta_id']));
+                array_push($return_rels,self::$_mod->ddbb_query('*',$newtab,'id',$value[$vall.'_id']));
             }
         }
         
@@ -130,9 +132,9 @@ class modMain{
        
     }
 
-    public function update_usr($nm,$ps,$id){
+    public function update_usr($nm,$ps,$id,$roles){
 
-        $n_aw=self::$_mod->ddbb_upd($nm,$ps,$id);
+        $n_aw=self::$_mod->ddbb_upd($nm,$ps,$id,$roles);
         return $n_aw;
 
 

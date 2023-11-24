@@ -16,3 +16,4 @@ if(file_exists(__DIR__).'/config.php'){
  
     $t = new srcinit();	
     $t->public();
+   

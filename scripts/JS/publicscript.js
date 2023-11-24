@@ -1,18 +1,26 @@
 
 // https://bootstrapfriendly.com/blog/form-submission-using-javascript-ajax-and-php
 
-console.log('Public Script - halfegg');
 
-const saveButton = document.getElementById('save_pr');
+//const prefix = 'halfegg1';
 
- saveButton.addEventListener('click',function(e){
-    e.preventDefault();
+// GET DOMAIN 
+let url =  window.location.href;
+let ext = window.location.search;
+const baseurl = url.replace(ext,'');
  
-    save_ajax();
+window.onload = (event) => {
+    const saveButton = document.getElementById('save_pr');
+ console.log(saveButton);
+    saveButton.addEventListener('click',function(e){
+        e.preventDefault();
     
- });
+        save_ajax();
+        
+    });
 
-//window.onload = (event) => {}
+}
+
 function save_ajax() {
     var  xmlhttp;
     if(window.XMLHttpRequest){
@@ -21,7 +29,7 @@ function save_ajax() {
       xmlhttp = new ActiveXObject("Microsoft.XMLHTTP")
 
     }
-    let url = 'http://localhost/halfegg/src/public/log/publicFormAjax.php';
+    let url = baseurl+'src/public/log/publicFormAjax.php';
 
 
     // Instantiating the request object
@@ -54,6 +62,3 @@ function save_ajax() {
     
 
 }
-
- 
-

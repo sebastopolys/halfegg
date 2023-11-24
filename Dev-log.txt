@@ -4,13 +4,15 @@
 
 - Use hash from session variable, to validate it with database user table
 
+- Continue development from admin/log/createItemAjax.php / Items CRUD 
+
 
 * * *  B U G   L O G  * * *
 
-bug 101 ;
+bug 101 ; FIXED;
     Registration of multiple users with same registration link.
     Halfegg\admin\log\adminLog; L:66
-    FIXED;
+   
  
 bug 102 : 
     users cannot use same password

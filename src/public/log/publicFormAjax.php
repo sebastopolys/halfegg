@@ -14,27 +14,34 @@ class publicFormAjax {
      * Database Conection
      */
     private $_dbmod = NULL;
-
-      //private $_currmod = NULL;
-      private $_currmod = 'defaultProfile.php';
  
+   
+    /**
+     * Database Prefix
+     */
+    private static $_prefx = NULL;
 
+    /**
+     * Model File
+     */
+    private static $_currmod = 'defaultProfile.php';
+
+    
     public function __construct(){
        
         $this->initialize();
        
         // Get User 
-        $user =$this->_dbmod->ddbb_get_data('*','halfegg_users','id',htmlspecialchars(trim($_POST['userid'])));
+        $user =$this->_dbmod->ddbb_get_data('*',self::$_prefx.'_users','id',htmlspecialchars(trim($_POST['userid'])));
         
-        // Die if user is not allowed to edit (role !=4)       
-        if($user['role']!=='4'){
-            die ("User is not allowed to edit/create Personal Information");
-        }
-
+         
+      
 
         #~ MODE
         // include the user mod file
-        $mod= include_once(dirname(dirname(__DIR__)).'/mods/presets/'.$this->_currmod);
+        $mod= include_once(dirname(dirname(__DIR__)).'/mods/presets/'.self::$_currmod);
+
+     
         
         // get mod labels
         $modlabels = [];
@@ -45,7 +52,7 @@ class publicFormAjax {
 
         #~ USER META
         // get user meta id's relation
-        $rels = $this->_dbmod->ddbb_relation('meta_id','halfegg_user_meta_rel',['user_id'=>htmlspecialchars(trim($_POST['userid'])),'type'=>'profile']);
+        $rels = $this->_dbmod->ddbb_relation('meta_id',self::$_prefx.'_user_meta_rel',['user_id'=>htmlspecialchars(trim($_POST['userid'])),'type'=>'profile']);
         
         // get user meta label
         $meta = $this->get_user_meta($rels  );
@@ -64,7 +71,7 @@ class publicFormAjax {
             $usid = htmlspecialchars(trim($_POST['userid']));
             for ($ii=0; $ii < count($modlabels); $ii++) {            
                 if(in_array($modlabels[$ii],$newreg)){
-                    $this->_dbmod->ddbb_insert('halfegg_users_meta',[[$modlabels[$ii],htmlspecialchars(trim($_POST[$modlabels[$ii]]))]],$usid);
+                    $this->_dbmod->ddbb_insert(self::$_prefx.'_users_meta',[[$modlabels[$ii],htmlspecialchars(trim($_POST[$modlabels[$ii]]))]],$usid);
                 }             
             }
         }
@@ -73,7 +80,7 @@ class publicFormAjax {
         foreach ($meta as $ix => $lab) {
             if(!empty(htmlspecialchars(trim($_POST[$lab['label']])))
                 &&$lab['value']!== htmlspecialchars(trim($_POST[$lab['label']]))) {               
-                    $this->_dbmod->ddbb_update('halfegg_users_meta',
+                    $this->_dbmod->ddbb_update(self::$_prefx.'_users_meta',
                     htmlspecialchars(trim($_POST[$lab['label']])),
                     $lab['id']);
             }
@@ -85,7 +92,7 @@ class publicFormAjax {
         if($rels){
             $dummy = '';           
             foreach ($rels as $key => $value) { 
-                $dummy = $this->_dbmod->ddbb_get_data('*','halfegg_users_meta', 'id', $value[0]); 
+                $dummy = $this->_dbmod->ddbb_get_data('*',self::$_prefx.'_users_meta', 'id', $value[0]); 
                 if($dummy){
                     array_push($meta,[    
                                 'id'=>$dummy['id'],
@@ -99,11 +106,15 @@ class publicFormAjax {
     }   
 
     private function initialize(){
-      
-        include(dirname(dirname(__DIR__)).'/incs/ajaxQueries.php'); 
-        
+         
         if($this->_dbmod===NULL){
+            include(dirname(dirname(__DIR__)).'/incs/ajaxQueries.php'); 
             $this->_dbmod = new ajaxQueries();
+        }
+
+        if(self::$_prefx===NULL){
+          //  include(dirname(dirname(dirname(__DIR__))).'/config.php');
+            self::$_prefx = SHPRFIX;
         }
         
     }

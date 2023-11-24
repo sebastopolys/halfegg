@@ -2,12 +2,24 @@
 namespace Halfegg\admin\templates;
 
 use Halfegg\incs\adminBackendToggle;
+use Halfegg\incs\getUrlPar;
 
 class adminMainDashboard{
     function intralog_dashboard($usrs){
 
+       // $rol_caps = require_once(dirname(dirname(__DIR__)).'/mods/presets/roleCapabilities.php');
+
+        $par = new getUrlPar('userid');
+        $tu = new adminTargetUser();
+
+        if($par::$par != NULL){
+
+            $md =$tu->targetUser($par::$par);
+
+        } else {
+
         # NAVigation
-    $md = '
+        $md = '
         <div id="cont">
             <header><h1>'.MAINAME.'</h1>
             
@@ -27,13 +39,16 @@ class adminMainDashboard{
             </nav>
             <div id="m-content" class="il-dash il-content">';
     
-     
+           
+           
         
               $ryp= new adminBackendToggle($usrs);
               $md .= $ryp->_html;
+
+            
         
-    $md .= '</div></div><pre>'.VERSION.'</pre>';
-         
+            $md .= '</div></div><pre>'.VERSION.'</pre>';
+         }
     return $md;
        
     }

@@ -4,7 +4,9 @@ namespace Halfegg\incs;
 use DateTime;
 
 class clientLogin{
+
     public static $_client = NULL;
+    
     public function cl_sess_data($id){
         $date = new DateTime();    
         $data=array();    

@@ -12,6 +12,12 @@ use Halfegg\incs\adminRegistrationLink;
 use Halfegg\admin\templates\registerSuccess;
   
 class adminLog{
+
+    /**
+    *   Default Roles 
+    */ 
+    private static $defrols = DEFROLE;
+
     public function run_admin(){
 
         if(!isset($_SESSION)){
@@ -42,7 +48,7 @@ class adminLog{
                     $all_users= $rt->val_users();                    
 
                     # display backend admin class
-                    $rm = new adminMainView($all_users );
+                    $rm = new adminMainView($all_users);
              
                     # run $_POST validation to backend 
                     new validateAdminBackend();
@@ -117,7 +123,11 @@ class adminLog{
                 if($_POST['mail-log']==$rwt->val_db_hash($_GET['st'])['email']){
                 
                     echo "<pre>Success, email exist and validated on DB. Account is active</pre>";
-                    $rwt->update_usr($_POST['name-log'],$_POST['pass-log'],$usdb_id);
+
+                    // DEFAULT ROLES
+                    $roles = serialize(self::$defrols);
+
+                    $rwt->update_usr($_POST['name-log'],$_POST['pass-log'],$usdb_id,$roles);
                     // Redirect to home
                     header('location: '.MANPATH.'/'.BASPATH.'?msg=welcome');
                     die();

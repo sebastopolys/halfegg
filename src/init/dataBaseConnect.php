@@ -12,7 +12,7 @@ class dataBaseConnect{
     // CONECTION
     public function __construct(){
         try {			
-			$dbh = new PDO("mysql:host=$this->_host","root","" ); // user & pasword
+			$dbh = new PDO("mysql:host=$this->_host",DBUSER,DBPASS ); // user & pasword
 		} catch (PDOException $poet){
 			$poet->getMessage();
         }

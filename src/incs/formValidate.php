@@ -9,6 +9,7 @@ class formValidate{
     public static $_dat=NULL;
 
     public function validation($us_d){
+ 
 # DB validation
         if(!empty($us_d)&&!empty($_POST['psw_f'])):        
           $user_dat= $us_d;

@@ -8,27 +8,46 @@ class useThisMod{
     /**
      * User Id
      */
-    private static $_usid = NULL;
+    public static $_usid = NULL;
 
     /**
      * User Role
      */
     private static $_usrol = NULL;
+
     /**
      * Database Conection
      */
     private static $_dbmod = NULL;
 
-   
-    private static $_mod = NULL;     
+    /**
+     * Mod Preset
+     */   
+    private static $_mod = NULL;    
+    
+    /**
+     * Open form
+     */
+    private static $_openform = NULL;
+
+    /**
+     * User data
+     */
+    private static $_userdata = NULL;
+
+     
 
     public function __construct($user_id){
+         
         if(self::$_usid===NULL){
-            self::$_usid = $user_id['id'];
-        }
+            self::$_usid = $user_id['id'];              
+        }   
+            
         if(self::$_usrol===NULL){
             self::$_usrol = $user_id['role'];
         }
+      
+
         if(self::$_dbmod===NULL){
             self::$_dbmod = new modMain();
         }
@@ -36,23 +55,37 @@ class useThisMod{
              self::$_mod = require_once('presets/'.CURRMOD);   
                    
         }
+        if(self::$_openform===NULL){
+            self::$_openform =  
+                      '<input id="userid" name="userid" type="hidden" value="'.$user_id['id'].'"/>                           
+                     <button value="save" id="save_pr" class="profile-butt" name="save-profile">save</button>
+                     <br/><br/>';
+        }
+        if(self::$_userdata===NULL){
+            self::$_userdata = '<p>User ID: '.$user_id['id'].'</p>
+                     <p>User name: '.$user_id['username'].'</p>
+                     <p>email: '.$user_id['email'].'</p>';
+        }
      
     }
 
-    public function printProfile(){
-
+    public function printProfile( ){
+        
         // get user meta 
         if(self::$_dbmod){
             //  get meta user data from database
             $result =  self::$_dbmod->get_relations('meta_id',USMTRL,['user_id'=>self::$_usid,'type'=>'profile']);
-        
+            
+            if(!$result){return null;}
+
             // get array of data ($return)
             $return = [];
             foreach ($result as $k => $v) {
                 $return[$v['label']]=$v['value'];                
             }
+            
             // no meta user data
-            if(!$return){return " ";}
+            if(!$return){return null;}
             
             // default avatar
             if(array_key_exists('gender',$return)){
@@ -62,21 +95,22 @@ class useThisMod{
             }
 
             // inputs
-            $output ='<input id="userid" name="userid" type="hidden" value="'.self::$_usid.'"/>';      
+            
+            $output =     self::$_openform . self::$_userdata;
            // $output = '';     
             foreach (self::$_mod as $k => $v) {  
                 // no database register for this label
                 if(empty($return[$v[0]])){
                    
                     $output.= '<p><span class="profile-label">'.$v[1].': </span>';
-                    if(self::$_usrol==4){
+                    
                         $output .= $this->profileInputs($v[2],$v[0],null,$v[3]).'This meta is not registered</p>';
-                    }
+                    
                 } else {
+
                     $output.= '<p><span class="profile-label">'.$v[1].': <span class="prof-data">'.$return[$v[0]].'</span></span>';
-                    if(self::$_usrol==4){
-                        $output .= $this->profileInputs($v[2],$v[0],$return[$v[0]],$v[3]).'</p>';
-                    }
+                    
+                        $output .= $this->profileInputs($v[2],$v[0],$return[$v[0]],$v[3]).'</p>';                   
 
                 }
                 
@@ -86,14 +120,14 @@ class useThisMod{
 
         }
 
-        return 'ERROR';
+        return null;
 
     }
 
     public function createUserMeta(){
 
         $img= '<div><img src="'.MANPATH.'/'.BASPATH.'/assets/images/defaultfemale.png"></div>';
-        $out ='';      
+        $out = self::$_openform;      
         // $output = '';     
          foreach (self::$_mod as $k => $v) {  
                
@@ -153,4 +187,20 @@ class useThisMod{
 
         return $pr_inp.'</span>';
     }
+
+    public function printItem( ){
+ 
+        $item = self::$_dbmod->get_relations('item_id', USITRL, ['user_id'=>self::$_usid,'type'=>'item']);
+       
+        $cn = '';
+        if($item){
+            $cn .= '<h3>'.$item[0]['name'].'</h3>';
+            $cn .= '<h5>'.$item[0]['description'].'</h5>';
+            //var_dump($item[0]);
+            $cn .= htmlspecialchars_decode($item[0]['content']);
+        }
+        return $cn;
+    }
+
+    
 }

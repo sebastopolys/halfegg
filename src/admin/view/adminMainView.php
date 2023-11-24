@@ -10,7 +10,7 @@ class adminMainView{
     public function __construct($user_dat){
         
         $he = new headerRegister();
-        echo $he->header_register(PREFIX);
+        echo $he->header_register(PREFIX,$user_dat);
 
         $ad = new adminMainDashboard();
         echo $ad->intralog_dashboard($user_dat);

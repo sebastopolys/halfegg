@@ -1,8 +1,12 @@
 <?php
  
 namespace Halfegg\public\templates;
+
 use Halfegg\mods\useThisMod;
+use Halfegg\incs\checkRoleCaps;
 class publicClient{
+
+    private static $_rol_caps = [];
 
     
 
@@ -14,12 +18,18 @@ class publicClient{
             $get_page=NULL;
         endif;
 
+        if(empty(self::$_rol_caps)&&$us_dat):             
+            self::$_rol_caps = new checkRoleCaps($us_dat['role']);
+        endif;
+
+
+
         
             if(!empty($_SESSION['login'])&&!isset($_SESSION['logout'])){
 
                 $thismod = new useThisMod($us_dat);
 
-                $user_sess=$_SESSION['login'];
+                //$user_sess=$_SESSION['login'];  //   <----   ??? check this bug ?
                 if($get_page!==NULL&&$get_page=="dash"){                
                     
                     $cc='<section><br/><br/>';
@@ -27,7 +37,7 @@ class publicClient{
                     
                     $cc .='</section>';
                 
-                }elseif($get_page!==NULL&&$get_page=="acc"){
+                } elseif($get_page!==NULL&&$get_page=="acc"){
                    
                  
                     // Form && Buttons
@@ -36,52 +46,62 @@ class publicClient{
                     $cc .= '<div id="ajax_response"></div>';
                     $cc .= '<form id="edit_profile_f" enctype="multipart/form-data">';
                     $cc .= '<input id="userid" name="userid" type="hidden" value="'.$us_dat['id'].'"/> 
-
-                            <button value="edit" id="edit_pr" class="profile-butt" name="edit-profile">edit</button>
-                            <button value="save" id="save_pr" class="profile-butt" name="save-profile">save</button>
+                           
                             <br/><br/>';
-
-                    // Profile Avatar
-                    $cc .= $thismod->printProfile()[0];
-                    // Account related 
-                    $cc .='<p>User name: '.$us_dat['username'].'</p>';
-                    $cc .='<p>email: '.$us_dat['email'].'</p>'; 
                     
-                    // Profile      
-                    if(!empty($thismod->printProfile()[1])){
-                        $cc .=  $thismod->printProfile()[1];   
-                    } else {
-                        if($us_dat['role']==4){
-                            
-                            $cc .= '<h2>Please complete your personal information</h2>';
-                            $cc .= $thismod->createUserMeta()[1];
-                        } else {
-                            $cc .= 'No Personal information. Please contact to report this';
-                        }
-                        
-                    }                  
-                  /*
-
-                    if($us_lic){
+                    
+                   
+                    
+                    // Profile
+                  // print_r(self::$_rol_caps->check);
                        
-                        $cc .='<p>Licence ID: '.$us_lic['id'].'</p>';                       
-                        $cc .='<p>Licence status: ';
-                        if($us_lic['status']==0):
-                            $cc.='unactive</p>';
-                        elseif($us_lic['status']==-1):
-                            $cc.='admin</p>';
-                        elseif($us_lic['status']==1):
-                            $cc.='active</p>';
-                        else:
-                            $cc.='unknown</p>';
-                        endif;
-                        $cc .='<p>Licence created on: '.$us_lic['last_action'].'</p>';
-                    }
-                    else{
-                        $cc .= '<p>There is no license attached to this account</p>';
-                    }
-                    */
+                    if(!empty($thismod->printProfile()[1])){
+
+                        // Profile Avatar
+                        if(!empty($thismod->printProfile()[0])){
+                           
+                            $cc .= $thismod->printProfile()[0];     echo " <br/>"; 
+                        }
+                            // Account related 
+                            $cc .='<p>User name: '.$us_dat['username'].'</p>';
+                            $cc .='<p>email: '.$us_dat['email'].'</p>';
+                        
+                            if(in_array('can_view_profile',self::$_rol_caps->check)){
+                                
+                                $cc.= "<pre>can view Profile:</pre> <br/>"; 
+                                $cc .=  $thismod->printProfile()[1];
+
+                            } elseif(in_array('can_edit_profile',self::$_rol_caps->check)){
+ 
+                                $cc.= "<pre>can view && edit Profile: </pre> <br/>"; 
+                                $cc .=  $thismod->printProfile()[1];
+
+                            } else {
+                                $cc .= 'continue';
+                            } 
+
+                    } elseif(in_array('can_create_profile',self::$_rol_caps->check)){
+ 
+                        $cc .= '<h2>Please complete your personal information</h2>';
+            
+                        $cc .= $thismod->createUserMeta()[1];
+
+
+                    } else {
+
+                       $cc .= 'Permission denied';
+
+                    }                  
+
                     $cc.=  '</section>';
+
+                    // ITEM
+                    if(in_array('can_view_item',self::$_rol_caps->check)){
+                        $cc .= '<section>';
+                        $cc .=   $thismod->printItem();
+                        $cc .= '</section>';
+                    }
+
                 }
                 else{
                     $cc='<section><h2>Home page</h2><p>Welcome back.</p></section>';

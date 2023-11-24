@@ -14,6 +14,7 @@ class installDatabase extends dataBaseConnect{
         $dbname = self::$dbname;
                 $see = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$dbname'";  
                 if($this->query_database($see)===false){
+                    echo '<script>prompt("Install database?");</script>';
                     $this->install_database($dbname);
                     $this->insertOptions();
 
@@ -161,9 +162,11 @@ class installDatabase extends dataBaseConnect{
             ['hompath',HOMPATH ],
             ['baspath',BASPATH ],
             ['manpath',MANPATH ],
-            ['currmod','defaultProfile.php']
+            ['prefix',PREFIX],
+            ['shprfix',SHPRFIX],
+            ['currmod',CURRMOD]
         ];
-
+ 
         $dbname = self::$dbname;
         $see="INSERT INTO $dbname.`$tab` (`label`, `value`,`last_action`,`created_at` ) 
         VALUES (?,?,CURRENT_DATE(),CURRENT_DATE()) ";
