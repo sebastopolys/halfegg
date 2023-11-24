@@ -1,27 +1,32 @@
 <?php
 
 # STRINGS
-    define('MAINAME','Halfegg 1');
-    define('PREFIX','halfegg1');
-    define('SHPRFIX','hlfg1');
+    // Proyect name
+    define('MAINAME','Acquarium');
+    // proyect domain (required)
+    define('PREFIX','acquarium');
+    // proyect prefix (required)
+    define('SHPRFIX','acqrum');
+    // proyect description
     define('DESCR','A customer Portal');
-    define('VERSION','0.0.5');
+    // proyect version
+    define('VERSION','0.0.7');
 
 # Database
-    #~  Name
-    define('NAMBDAT','halfegg1');
-    #~ prefix
+    #~  Name (required) 
+    define('NAMBDAT','acqua');
+    #~ prefix (don't edit)
     define('DBPRFX',SHPRFIX.'_');
-    #~ host
+    #~ host 
     define('HOSBDAT','localhost');
-    #~ user
+    #~ user (required)
     define('DBUSER','root');
-    #~ user password
+    #~ user password (required)
     define('DBPASS','');
     #~ version
     define('DBVERS','0.0.2');
 
-# TABLES
+# TABLES (don't edit)
     #~ users
     define('USERTB',DBPRFX.'users');
     #~ items
@@ -39,7 +44,7 @@
     #~ item item_meta relation
     define('ITMTRL',DBPRFX.'item_meta_rel');
 
-# PATHS
+# PATHS (don't edit)
     define('ABSPATH',dirname(__DIR__));
     define('HOMPATH',__DIR__);
     define('FILPATH',__FILE__);

@@ -1,0 +1,52 @@
+
+
+* Installation Instructions 
+
+Step 1:
+
+_Unzip proyect under public www folder
+
+Step 2:
+
+_Edit config.php file
+
+Step 3:
+
+_Run script
+
+Step 4
+
+_Once database is installed, Create admin user
+
+
+
+CREATE ADMIN USER:
+
+Use phpmyadmin or similar to edit database in order to create admin user, for security reason this is the only way to create admin user.
+
+Step 1
+
+_ Create register in *database_prefix*_users table:
+    _username: chose _one 
+    _email: optional
+    _role: null
+    _hash: null
+
+Step 2 
+
+_ Create admin item in *database_prefix*_items table:
+    _name: admin
+    _type: admin
+    _content: -1
+    _status: -1
+
+Step 3
+
+_Create user -> item relation on *database_prefix*_user_item_rel table:
+    _type: admin
+    _user_id: 1
+    _item_id:1
+
+
+
+Enter to admin dashboard on Proyect URL with /intralog.php added in the browser.
