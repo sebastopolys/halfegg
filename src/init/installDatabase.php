@@ -14,25 +14,28 @@ class installDatabase extends dataBaseConnect{
         $dbname = self::$dbname;
                 $see = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$dbname'";  
                 if($this->query_database($see)===false){
-                    echo '<script>prompt("Install database?");</script>';
-                    $this->install_database($dbname);
-                    $this->insertOptions();
-
-                    echo "Inexistent Database. <br/>New DAtabase ($dbname) has been installed";
+                    echo '<p>There is no database for this domain</p>';
+                    echo '<p>Ensure the completion of installation procedure before installing database</p>';
+                    echo '<p>¿Install database now?</p>';
+                    echo '<form method="post">
+                    <input type="submit" value="INSTALL" name="inst_ddbb">
+                    <input type="submit" value="CANCEL" name="cancel_ddbb">
+                    </form>';
+                    if(isset($_POST['inst_ddbb'])){
+                        $this->create_database($dbname);
+                        $this->insertOptions();
+                        echo " <br/>New DAtabase ($dbname) has been installed";
+                        
+                    }
                     return TRUE;
+                   
                 }
                 // echo 'Database is Ok.';
                 return FALSE;
             
          
     }
-
-    private function install_database($dbname){    
-
-        $this->create_database($dbname);
-
-    }
-    
+ 
     #  create database 
     private function create_database($dbname){
 

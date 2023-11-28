@@ -24,7 +24,8 @@ class publicForm{
                 <div class="f_inp"><label for="user_f">User</label>
                     <input type="text" name="user_f" ></div>
                     <div class="f_inp"><label for="psw_f">Password</label>
-                    <input type="text" name="psw_f"></div>
+                    <input type="password" name="psw_f"></div>
+                    <input type="password" name="bot_f" style="display:none;"> 
                     <div class="f_inp"><input type="submit" name="submit_f"value="LOGIN">
                     <input type="submit" name="submit_fl"value="lost password">
                 </div>      

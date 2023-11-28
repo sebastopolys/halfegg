@@ -4,12 +4,17 @@ namespace Halfegg\incs;
 class modMain{
     public $_sess = NULL;
     private static $_mod = NULL;
+    private static $_ip = NULL;
     
     public function __construct(){  
         # autostart 
         # database conection
         if(self::$_mod==NULL){
-        self::$_mod = new modDatabase();
+            self::$_mod = new modDatabase();
+        }
+        # Get client IP class
+        if(self::$_ip==NULL){
+            self::$_ip = new getTheIP();
         }
         //$us_c=new modDatabase();   
        
@@ -18,7 +23,10 @@ class modMain{
         isset($_POST['user_f'])&&$_POST['user_f']
         &&isset($_POST['psw_f'])&&$_POST['psw_f']
         &&isset($_POST['submit_f'])){      
-            
+            // BOT TRAP
+            if(!empty($_POST['bot_f'])){
+                die('caught by bot trap!');
+            } 
             # incs/class-mod_db.php
             // try to Get name from DB
             $us_row=self::$_mod->ddbb_query('*',USERTB,'username',$_POST["user_f"]);  
@@ -33,7 +41,11 @@ class modMain{
                 $va = new formValidate;
                 $this->_sess = $va->validation($us_row);               
             
-            } 
+            } else {
+                echo "TRACK BLOCK IP";
+                echo(self::$_ip->getRealIP());
+                # Track Block IP
+            }
         }
         # logout
         elseif(isset($_POST['logout_f'])&&!isset($_SESSION['logout'])){        

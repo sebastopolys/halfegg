@@ -1,24 +1,47 @@
 <?php
 namespace Halfegg\incs;
+
 use PDO;
 use DateTime;
 
 
 class modDatabase{    //https://www.php.net/manual/en/pdo.prepared-statements.php
-// CONSTANTS
-    private $_name= NAMBDAT;
-    private $_host= HOSBDAT;
   
     private $_conn= NULL;
     private $returned = NULL;
-// CONECTION
+
     public function __construct(){
+        
+        // get ENV data  ->https://dev.to/walternascimentobarroso/dotenv-in-php-45mn
+        $env = new DotEnvEnvironment();
+        $env->load(dirname(dirname(__DIR__ )));
+        $dbus = getenv('DBUSER');
+        $dbnm = getenv('NAMBDAT');
+        $dbhs = getenv('HOSBDAT');
+
+        /*
+        *
+        * *
+        *
+        */
+
+        // enable on live server
+        $dbps = $_ENV('DBPASS');
+
+        /*
+        * *
+        * 
+        */
+
+        // Conection
         try {
-			$dsn = "mysql:host=$this->_host;dbname=$this->_name";
-			$dbh = new PDO($dsn, DBUSER,DBPASS ); // user & pasword
+			$dsn = "mysql:host=$dbhs;dbname=$dbnm";
+			$dbh = new PDO($dsn, $dbus,DBPASS );  
 		} catch (PDOException $poet){
 			$poet->getMessage();
         }
+
+        // return conection
         if($dbh!==NULL&&$this->_conn==NULL){
             $this->_conn=$dbh;
             return $this->_conn;

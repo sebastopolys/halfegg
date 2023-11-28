@@ -11,7 +11,11 @@ class formValidate{
     public function validation($us_d){
  
 # DB validation
-        if(!empty($us_d)&&!empty($_POST['psw_f'])):        
+        if(!empty($us_d)&&!empty($_POST['psw_f'])):       
+            // BOT TRAP
+            if(!empty($_POST['bot_f'])){
+                die('caught by bot trap!');
+            } 
           $user_dat= $us_d;
           # PSW validation
           if($user_dat['password']==$_POST['psw_f']): 

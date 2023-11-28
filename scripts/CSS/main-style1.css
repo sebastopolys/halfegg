@@ -90,7 +90,7 @@ p,a,h1,h2,h3,h4,h5,form,input,section,label,div{
     margin-left:10%;
 }
 
-#container>  section:nth-child(3){
+#container>  section:nth-child(3),section.marg-l-section{
     margin-left:10%;
 }
 
@@ -118,7 +118,7 @@ span.profile-input{
     display:none;
 }
 
-#container>  footer{
+#container > footer{
    
     width: 80%;
     margin: auto;

@@ -41,7 +41,7 @@ class publicClient{
                    
                  
                     // Form && Buttons
-                    $cc = '<section><br/><br/>';     
+                    $cc = '<section class="marg-l-section"><br/><br/>';     
                     $cc .= '<h2>Account</h2>';
                     $cc .= '<div id="ajax_response"></div>';
                     $cc .= '<form id="edit_profile_f" enctype="multipart/form-data">';

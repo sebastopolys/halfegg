@@ -24,3 +24,47 @@ bug 104 :
     Duplicated email on user creation returns error
 
 
+
+
+
+
+
+
+* * *   S E C U R I T Y    F E A T U R E S   * * *
+
+Bot trap:    *DONE*
+    Hidden input field on forms die() if bot fills Items
+
+Track IP:
+    if form validation fails, get client IP and save the following data in options table:
+        "label" = Client IP
+        "value" = Failed login attemp count
+
+Block IP:
+    Block Client IP if condition (To many attemps within given time) || (to many attemps)
+
+Escape strings:
+    Escape html and special chars in all form inputs
+
+REGEX validation:
+    Apply regex validation on emails, numbers and string inputs
+
+ENV file:
+    ENV file with sensitive information outside public folder
+    loaded in config.php file
+
+
+***********  ACTIONS: 
+
+/incs/modMain.php 
+
+    22: Bot Trap    *DONE*
+    23: Escape input STRINGS
+    37: TRACK BLOCK IP
+
+/incs/formValidate.php
+
+    16: Bot Trap    *DONE*   
+    33: TRACK BLOCK IP
+
+

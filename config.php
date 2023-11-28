@@ -1,17 +1,18 @@
 <?php
+ 
 
 # STRINGS
-    // Proyect name
+    // Project name
     define('MAINAME','Acquarium');
-    // proyect domain (required)
+    // project domain (required)
     define('PREFIX','acquarium');
-    // proyect prefix (required)
+    // project prefix (required)
     define('SHPRFIX','acqrum');
-    // proyect description
+    // project description
     define('DESCR','A customer Portal');
-    // proyect version
+    // project version
     define('VERSION','0.0.7');
-
+   
 # Database
     #~  Name (required) 
     define('NAMBDAT','acqua');
@@ -61,3 +62,5 @@
 # DEBUG
     define('DEBUG',false); 
  
+#~ ENV 
+
