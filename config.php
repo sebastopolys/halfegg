@@ -1,5 +1,18 @@
 <?php
  
+ 
+include_once(__DIR__.'/DotEnvEnvironment.php');
+
+ $env = new DotEnvEnvironment();
+ $env->load(__DIR__ );
+ 
+ $dbnm = getenv('NAMBDAT');
+ $dbhs = getenv('HOSBDAT');
+ $dbus = getenv('DBUSER');
+ $dbvr = getenv('DBVERS');
+
+ // ENABLE ON LIVE SERVER
+ // $dbps = getenv('DBPASS');
 
 # STRINGS
     // Project name
@@ -12,20 +25,20 @@
     define('DESCR','A customer Portal');
     // project version
     define('VERSION','0.0.7');
-   
+    
 # Database
     #~  Name (required) 
-    define('NAMBDAT','acqua');
+    define('NAMBDAT',$dbnm);
     #~ prefix (don't edit)
     define('DBPRFX',SHPRFIX.'_');
     #~ host 
     define('HOSBDAT','localhost');
     #~ user (required)
-    define('DBUSER','root');
-    #~ user password (required)
+    define('DBUSER',$dbus);
+    #~ user password (required) USE $dbps var on live server !
     define('DBPASS','');
     #~ version
-    define('DBVERS','0.0.2');
+    define('DBVERS',$dbvr);
 
 # TABLES (don't edit)
     #~ users
@@ -62,5 +75,6 @@
 # DEBUG
     define('DEBUG',false); 
  
-#~ ENV 
-
+ 
+ 
+ 

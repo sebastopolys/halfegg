@@ -108,9 +108,17 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+/* Client account page
+/* Hide save button*/
+#save_pr{
+    display:none;
+}
+#cancel_pr{
+    display:none;
+}
 /* hide form */
 span.profile-input{
-   /* display:none;*/
+    display:none;
 }
 
 /* hide default radio buton*/

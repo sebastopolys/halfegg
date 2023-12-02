@@ -5,33 +5,20 @@ use PDO;
 use DateTime;
 
 
-class modDatabase{    //https://www.php.net/manual/en/pdo.prepared-statements.php
+class modDatabase {
   
     private $_conn= NULL;
+    
     private $returned = NULL;
 
-    public function __construct(){
+    public function __construct(){        
+    
+        $dbnm = NAMBDAT ;
+        $dbhs = HOSBDAT;
+        $dbus = DBUSER;
         
-        // get ENV data  ->https://dev.to/walternascimentobarroso/dotenv-in-php-45mn
-        $env = new DotEnvEnvironment();
-        $env->load(dirname(dirname(__DIR__ )));
-        $dbus = getenv('DBUSER');
-        $dbnm = getenv('NAMBDAT');
-        $dbhs = getenv('HOSBDAT');
-
-        /*
-        *
-        * *
-        *
-        */
-
-        // enable on live server
-        $dbps = $_ENV('DBPASS');
-
-        /*
-        * *
-        * 
-        */
+        // ENABLE ON LIVE SERVER
+        // $dbps = DBPASS;
 
         // Conection
         try {

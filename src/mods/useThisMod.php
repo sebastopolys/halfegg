@@ -25,6 +25,8 @@ class useThisMod{
      */   
     private static $_mod = NULL;    
     
+     
+
     /**
      * Open form
      */
@@ -57,10 +59,13 @@ class useThisMod{
         }
         if(self::$_openform===NULL){
             self::$_openform =  
-                      '<input id="userid" name="userid" type="hidden" value="'.$user_id['id'].'"/>                           
-                     <button value="save" id="save_pr" class="profile-butt" name="save-profile">save</button>
-                     <br/><br/>';
+                      '<input id="userid" name="userid" type="hidden" value="'.$user_id['id'].'"/>
+                      <a href="#" value="edit" id="edit_pr" class="profile-butt" name="edit-profile">edit</a>                        
+                     <a href="#" value="save" id="save_pr" class="profile-butt" name="save-profile">save</a>
+                     <a href="#" value="cancel" id="cancel_pr" class="profile-butt" name="cancel-profile">cancel</a>
+                    ';
         }
+        
         if(self::$_userdata===NULL){
             self::$_userdata = '<p>User ID: '.$user_id['id'].'</p>
                      <p>User name: '.$user_id['username'].'</p>
@@ -69,14 +74,15 @@ class useThisMod{
      
     }
 
-    public function printProfile( ){
-        
+    public function printProfile($role){
+       
         // get user meta 
         if(self::$_dbmod){
             //  get meta user data from database
             $result =  self::$_dbmod->get_relations('meta_id',USMTRL,['user_id'=>self::$_usid,'type'=>'profile']);
             
             if(!$result){return null;}
+         //   if($role!=='view'&&$role!=='edit'){return null;}
 
             // get array of data ($return)
             $return = [];
@@ -96,26 +102,35 @@ class useThisMod{
 
             // inputs
             
-            $output =     self::$_openform . self::$_userdata;
+            $output = '';
+            
+            if( (is_string($role)&&$role=='admin')
+                || (is_array($role)&&in_array('can_edit_profile',$role))){
+            
+                
+                 $output .= self::$_openform;
+            }  
+             
            // $output = '';     
             foreach (self::$_mod as $k => $v) {  
                 // no database register for this label
+                $output .= '<p><span class="profile-label">'.$v[1].': </span>';
                 if(empty($return[$v[0]])){
-                   
-                    $output.= '<p><span class="profile-label">'.$v[1].': </span>';
                     
-                        $output .= $this->profileInputs($v[2],$v[0],null,$v[3]).'This meta is not registered</p>';
-                    
-                } else {
+                        $output .= '<span id="pr_dat_'.$v[0].'" class="prof-data">This meta is not registered</span>';
+                        $output .= $this->profileInputs($v[2],$v[0],null,$v[3]);
 
-                    $output.= '<p><span class="profile-label">'.$v[1].': <span class="prof-data">'.$return[$v[0]].'</span></span>';
+                } else {
                     
-                        $output .= $this->profileInputs($v[2],$v[0],$return[$v[0]],$v[3]).'</p>';                   
+                        $output.= '<span id="pr_dat_'.$v[0].'" class="prof-data">'.$return[$v[0]].'</span>';                    
+                        $output .= $this->profileInputs($v[2],$v[0],$return[$v[0]],$v[3]) ;                   
 
                 }
                 
-            }          
+            }      
+
             $output .= '</form>';
+
             return [$image,$output];
 
         }
@@ -127,7 +142,7 @@ class useThisMod{
     public function createUserMeta(){
 
         $img= '<div><img src="'.MANPATH.'/'.BASPATH.'/assets/images/defaultfemale.png"></div>';
-        $out = self::$_openform;      
+      $out = self::$_openform;      
         // $output = '';     
          foreach (self::$_mod as $k => $v) {  
                
@@ -185,7 +200,7 @@ class useThisMod{
             $options = [];
         }
 
-        return $pr_inp.'</span>';
+        return $pr_inp.'</span></p>';
     }
 
     public function printItem( ){

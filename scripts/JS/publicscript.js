@@ -11,11 +11,41 @@ const baseurl = url.replace(ext,'');
  
 window.onload = (event) => {
     const saveButton = document.getElementById('save_pr');
- console.log(saveButton);
+    const editButton = document.getElementById('edit_pr');
+    const cancelButton = document.getElementById('cancel_pr');
+  
+    if(saveButton==null){return;}
+    
     saveButton.addEventListener('click',function(e){
         e.preventDefault();
-    
+
+        saveButton.style = 'display:none';
+        editButton.style = 'display:block';
+        cancelButton.style = 'display:none';
+        accsave();
         save_ajax();
+        
+    });
+    
+    editButton.addEventListener('click',function(ee){       
+        ee.preventDefault();
+ 
+        saveButton.style = 'display:inline-block';
+        cancelButton.style = 'display:inline-block';
+        editButton.style = 'display:none';
+        
+        accedit();
+
+    });
+
+    cancelButton.addEventListener('click',function(e){
+        e.preventDefault();
+
+        saveButton.style = 'display:none';
+        editButton.style = 'display:block';
+        cancelButton.style = 'display:none';
+   
+        accancel();
         
     });
 
@@ -51,14 +81,67 @@ function save_ajax() {
     xmlhttp.send(formData);
 
     // replace DOM Html content
-    replaceText( formData) ;
+    replaceText(formData);
+
     function replaceText(formData){
+        let labels = document.getElementsByClassName('profile-label');
+        let values = document.getElementsByClassName('prof-data');
+  
+
+        
         for(var pair of formData.entries()){
-            let nam = pair[0];
-            let val = pair[1];
- 
-        }      
+    
+            let ele = document.getElementById('pr_dat_'+pair[0]);
+            if (ele !=null){
+                ele.textContent = pair[1];
+            }
+
+        }  
+      
     }
     
 
+}
+
+/*  Public client view account
+ 
+*   Show   input fields  and  save button when click on "edit button" 
+*   Hide values and edit button when click on "save button"
+*   Display results on ajax success
+*/
+
+function accedit(){
+    
+    let fields = document.getElementsByClassName('prof-data');
+    let inputs = document.getElementsByClassName('profile-input');
+  
+    for (var i = 0; i < fields.length; i++) {
+         
+        inputs[i].style = "display:inline-block"; 
+        fields[i].style = "display:none"; 
+    }
+}
+function accancel(){
+    let fields = document.getElementsByClassName('prof-data');
+    let inputs = document.getElementsByClassName('profile-input');
+
+
+    for (var ix = 0; ix < fields.length; ix++) {
+     
+        fields[ix].style = 'display:inline-block';
+        inputs[ix].style = 'display:none';
+        
+    }
+}
+function accsave(){
+    let fields = document.getElementsByClassName('prof-data');
+    let inputs = document.getElementsByClassName('profile-input');
+
+
+    for (var ix = 0; ix < fields.length; ix++) {
+     
+        fields[ix].style = 'display:inline-block';
+        inputs[ix].style = 'display:none';
+        
+    }
 }

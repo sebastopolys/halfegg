@@ -393,6 +393,10 @@ span.form-it:nth-child(4) > i:nth-child(3) > mark:nth-child(1){
     height: 715px;
 }
 
+#m-content > #il_view{
+    background-color:#edf0fb;
+}
+
 #cont{
 
     margin: 20px;
@@ -418,7 +422,7 @@ span.form-it:nth-child(4) > i:nth-child(3) > mark:nth-child(1){
 
 
 #intralog-nav > ul:nth-child(1) li:hover{
-    background-color: yellow;
+    background-color: rgb(239, 239, 212);
     border: 2px solid red;
     cursor: pointer;
    

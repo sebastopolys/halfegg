@@ -14,7 +14,7 @@ class checkRoleCaps{
     public $check = [];
 
     public function __construct($roles){
-
+ 
         if(self::$_rol_caps===null):
 
             self::$_rol_caps = require_once(dirname(__DIR__).'/mods/presets/roleCapabilities.php');

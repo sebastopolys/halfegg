@@ -52,15 +52,15 @@ class publicClient{
                     
                    
                     
-                    // Profile
-                  // print_r(self::$_rol_caps->check);
+                    // role capabilities
+                    // print_r(self::$_rol_caps->check);
                        
-                    if(!empty($thismod->printProfile()[1])){
+                    if(!empty($thismod->printProfile(self::$_rol_caps->check)[1])){
 
                         // Profile Avatar
-                        if(!empty($thismod->printProfile()[0])){
+                        if(!empty($thismod->printProfile(self::$_rol_caps->check)[0])){
                            
-                            $cc .= $thismod->printProfile()[0];     echo " <br/>"; 
+                            $cc .= $thismod->printProfile(self::$_rol_caps->check)[0];     echo " <br/>"; 
                         }
                             // Account related 
                             $cc .='<p>User name: '.$us_dat['username'].'</p>';
@@ -68,13 +68,10 @@ class publicClient{
                         
                             if(in_array('can_view_profile',self::$_rol_caps->check)){
                                 
-                                $cc.= "<pre>can view Profile:</pre> <br/>"; 
-                                $cc .=  $thismod->printProfile()[1];
+                                
+                                $cc .=  $thismod->printProfile(self::$_rol_caps->check)[1];
 
-                            } elseif(in_array('can_edit_profile',self::$_rol_caps->check)){
- 
-                                $cc.= "<pre>can view && edit Profile: </pre> <br/>"; 
-                                $cc .=  $thismod->printProfile()[1];
+                             
 
                             } else {
                                 $cc .= 'continue';
@@ -97,7 +94,7 @@ class publicClient{
 
                     // ITEM
                     if(in_array('can_view_item',self::$_rol_caps->check)){
-                        $cc .= '<section>';
+                        $cc .= '<section class="marg-l-section">';
                         $cc .=   $thismod->printItem();
                         $cc .= '</section>';
                     }

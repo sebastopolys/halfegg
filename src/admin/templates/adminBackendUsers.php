@@ -58,7 +58,7 @@ class adminBackendUsers{
              
                     $ht .='</form></table>';
                  
-                    $ht .='</section></div><div id="il_view" style="background-color:yellow;">-</div>';
+                    $ht .='</section></div><div id="il_view">-</div>';
         
                 return $ht;
         }      

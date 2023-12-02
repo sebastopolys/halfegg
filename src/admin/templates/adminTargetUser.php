@@ -40,7 +40,7 @@ class adminTargetUser{
         $cd =  '<div id="ajax_response"></div>';
 
         #~ PROFILE
-        if(null == self::$thismod->printProfile() ){
+        if(null == self::$thismod->printProfile('admin') ){
             $cd .= '<form id="edit_profile_f" enctype="multipart/form-data">';
             $cd .= '<h3>Create Profile for this user</h3>';
             
@@ -49,10 +49,10 @@ class adminTargetUser{
         } else {           
             
            
-            $cd .= self::$thismod->printProfile()[0];            
+            $cd .= self::$thismod->printProfile('admin')[0];            
             $cd .= '<form id="edit_profile_f" enctype="multipart/form-data">';
             $cd .= '<h3>Profile for this user</h3>';
-            $cd .=self::$thismod->printProfile()[1];
+            $cd .=self::$thismod->printProfile('admin')[1];
         }
 
          #~ ITEM
