@@ -45,23 +45,19 @@ class publicClient{
                     $cc .= '<h2>Account</h2>';
                     $cc .= '<div id="ajax_response"></div>';
                     $cc .= '<form id="edit_profile_f" enctype="multipart/form-data">';
-                    $cc .= '<input id="userid" name="userid" type="hidden" value="'.$us_dat['id'].'"/> 
+                    $cc .= '<input id="userid" name="userid" type="hidden" value="'.$us_dat['id'].'"/>'; 
                            
-                            <br/><br/>';
+                            
                     
                     
                    
                     
                     // role capabilities
-                    // print_r(self::$_rol_caps->check);
+                   // print_r(self::$_rol_caps->check);
                        
-                    if(!empty($thismod->printProfile(self::$_rol_caps->check)[1])){
+                    if(!empty($thismod->printProfile(self::$_rol_caps->check))){
 
-                        // Profile Avatar
-                        if(!empty($thismod->printProfile(self::$_rol_caps->check)[0])){
-                           
-                            $cc .= $thismod->printProfile(self::$_rol_caps->check)[0];     echo " <br/>"; 
-                        }
+                    
                             // Account related 
                             $cc .='<p>User name: '.$us_dat['username'].'</p>';
                             $cc .='<p>email: '.$us_dat['email'].'</p>';
@@ -69,7 +65,7 @@ class publicClient{
                             if(in_array('can_view_profile',self::$_rol_caps->check)){
                                 
                                 
-                                $cc .=  $thismod->printProfile(self::$_rol_caps->check)[1];
+                                $cc .=  $thismod->printProfile(self::$_rol_caps->check);
 
                              
 
@@ -81,11 +77,14 @@ class publicClient{
  
                         $cc .= '<h2>Please complete your personal information</h2>';
             
-                        $cc .= $thismod->createUserMeta()[1];
+                        $cc .= $thismod->createUserMeta();
 
-
+                    } elseif(in_array('admin',self::$_rol_caps->check)){
+                        $cc .= "Admin account";
+                        $cc .= $_ENV['DBVERS'];
+                    
                     } else {
-
+ 
                        $cc .= 'Permission denied';
 
                     }                  

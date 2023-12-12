@@ -20,14 +20,22 @@ class checkRoleCaps{
             self::$_rol_caps = require_once(dirname(__DIR__).'/mods/presets/roleCapabilities.php');
 
         endif;
- 
-        foreach (unserialize($roles) as $rol) {
-            foreach (self::$_rol_caps[$rol] as $cap) {
-                 if(!in_array($cap,$this->check)){
-                    $this->check[] = $cap;
-                }               
+
+        // is admin
+        if(!is_array($roles)&&$roles==-1){
+            $this->check[] = 'admin';
+             
+        } else {
+            foreach (unserialize($roles) as $rol) {
+                foreach (self::$_rol_caps[$rol] as $cap) {
+                     if(!in_array($cap,$this->check)){
+                        $this->check[] = $cap;
+                    }               
+                }
             }
         }
+
+       
  
         return $this->check;
 

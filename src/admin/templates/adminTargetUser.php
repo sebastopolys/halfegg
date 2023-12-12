@@ -49,10 +49,10 @@ class adminTargetUser{
         } else {           
             
            
-            $cd .= self::$thismod->printProfile('admin')[0];            
+          
             $cd .= '<form id="edit_profile_f" enctype="multipart/form-data">';
             $cd .= '<h3>Profile for this user</h3>';
-            $cd .=self::$thismod->printProfile('admin')[1];
+            $cd .=self::$thismod->printProfile('admin');
         }
 
          #~ ITEM

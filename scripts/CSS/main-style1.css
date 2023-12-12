@@ -110,7 +110,7 @@ input[type=number] {
 
 /* Client account page
 /* Hide save button*/
-#save_pr{
+#save_pr.profile-butt{
     display:none;
 }
 #cancel_pr{

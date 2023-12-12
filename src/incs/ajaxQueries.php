@@ -27,14 +27,17 @@ class ajaxQueries{
     # # # # # # # # # # - - - > dDbB CONECTION < - - -  # # # # # # # # # # # # # #
 
     public function __construct(){
+ 
+ 
+
         if(include(dirname(dirname(__DIR__)).'/config.php'));
             if(self::$_dbpx===NULL){      
                 self::$_dbpx = SHPRFIX;
             }            
         try {
             
-			$dsn = 'mysql:host=localhost;dbname='.NAMBDAT;
-			$dbh = new PDO($dsn, 'root',''); // user & pasword
+			$dsn = 'mysql:host='.HOSBDAT.';dbname='.NAMBDAT;
+			$dbh = new PDO($dsn, DBUSER,''); // user & pasword
          
 		} catch (PDOException $poet){
 			$poet->getMessage();
@@ -43,6 +46,8 @@ class ajaxQueries{
             $this->_conn=$dbh;
             return $this->_conn;
         }
+
+
     }
 
 

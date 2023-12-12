@@ -33,6 +33,10 @@ class useThisMod{
     private static $_openform = NULL;
 
     /**
+     * Create open form
+     */
+    private static $_cr_open_form = NULL;
+    /**
      * User data
      */
     private static $_userdata = NULL;
@@ -59,11 +63,15 @@ class useThisMod{
         }
         if(self::$_openform===NULL){
             self::$_openform =  
-                      '<input id="userid" name="userid" type="hidden" value="'.$user_id['id'].'"/>
-                      <a href="#" value="edit" id="edit_pr" class="profile-butt" name="edit-profile">edit</a>                        
+                      '<a href="#" value="edit" id="edit_pr" class="profile-butt" name="edit-profile">edit</a>                        
                      <a href="#" value="save" id="save_pr" class="profile-butt" name="save-profile">save</a>
-                     <a href="#" value="cancel" id="cancel_pr" class="profile-butt" name="cancel-profile">cancel</a>
-                    ';
+                     <a href="#" value="cancel" id="cancel_pr" class="profile-butt" name="cancel-profile">cancel</a>';
+        }
+
+        if(self::$_cr_open_form===NULL){
+            self::$_cr_open_form = '<a href="#" value="edit" id="edit_pr" class="profile-butt" name="edit-profile">edit</a> 
+                                    <a href="#" value="save" id="save_pr" class="cr-prof-butt" name="save-profile">save</a>
+                                    <a href="#" value="cancel" id="cancel_pr" class="profile-butt" name="cancel-profile">cancel</a>';  
         }
         
         if(self::$_userdata===NULL){
@@ -91,15 +99,8 @@ class useThisMod{
             }
             
             // no meta user data
-            if(!$return){return null;}
-            
-            // default avatar
-            if(array_key_exists('gender',$return)){
-                $image= '<div><img src="'.MANPATH.'/'.BASPATH.'/assets/images/'.$this->profileImage($return['gender']) .'"></div>';
-            } else {
-                $image= '<div><img src="'.MANPATH.'/'.BASPATH.'/assets/images/'.$this->profileImage('X') .'"></div>';
-            }
-
+            if(!$return){return null;}            
+          
             // inputs
             
             $output = '';
@@ -118,12 +119,16 @@ class useThisMod{
                 if(empty($return[$v[0]])){
                     
                         $output .= '<span id="pr_dat_'.$v[0].'" class="prof-data">This meta is not registered</span>';
+                        $output .= '<span class="profile-input">';  
                         $output .= $this->profileInputs($v[2],$v[0],null,$v[3]);
+                        $output .= '</span>';  
 
                 } else {
                     
-                        $output.= '<span id="pr_dat_'.$v[0].'" class="prof-data">'.$return[$v[0]].'</span>';                    
-                        $output .= $this->profileInputs($v[2],$v[0],$return[$v[0]],$v[3]) ;                   
+                        $output.= '<span id="pr_dat_'.$v[0].'" class="prof-data">'.$return[$v[0]].'</span>';     
+                        $output .= '<span class="profile-input">';               
+                        $output .= $this->profileInputs($v[2],$v[0],$return[$v[0]],$v[3]) ; 
+                        $output .= '</span>';                  
 
                 }
                 
@@ -131,7 +136,7 @@ class useThisMod{
 
             $output .= '</form>';
 
-            return [$image,$output];
+            return $output;
 
         }
 
@@ -141,16 +146,19 @@ class useThisMod{
 
     public function createUserMeta(){
 
-        $img= '<div><img src="'.MANPATH.'/'.BASPATH.'/assets/images/defaultfemale.png"></div>';
-      $out = self::$_openform;      
+       
+      $out = self::$_cr_open_form;      
         // $output = '';     
          foreach (self::$_mod as $k => $v) {  
                
-                 $out.= '<p><span class="create-profile">'.$v[1].': </span>'.$this->profileInputs($v[2],$v[0],'',$v[3]).'</p>';
+                 $out.= '<p><span class="create-profile">'.$v[1].': </span>' .
+                        '<span class="create-input">' .   
+                        $this->profileInputs($v[2],$v[0],'',$v[3]) .
+                        '</span></p>';
              
          }          
          $out .= '</form>';
-         return [$img,$out];
+         return $out;
     }
 
     public function profileImage($gend){
@@ -166,9 +174,9 @@ class useThisMod{
     }
 
     private function profileInputs($type,$name,$placeholder,$options){
-
-        $pr_inp = '<span class="profile-input">';
-
+             
+   
+        $pr_inp = '';
         if($type==='text'||$type==='number'||$type==='date'){
             $pr_inp .= '<input type="'.$type.'" name="'.$name.'" id="pr_input_'.$name.'" value="'.$placeholder.'" placeholder="'.$placeholder.'">';
         }
@@ -199,8 +207,8 @@ class useThisMod{
             $pr_inp .='</select>';
             $options = [];
         }
-
-        return $pr_inp.'</span></p>';
+        //$pr_inp .= '</span>';
+        return $pr_inp.'</p>';
     }
 
     public function printItem( ){

@@ -1,46 +1,61 @@
 <?php
- 
- 
-include_once(__DIR__.'/DotEnvEnvironment.php');
 
+require_once __DIR__ . '/vendor/autoload.php'; // Ruta al autoload de la librería Dotenv
+
+use Dotenv\Dotenv;
+
+
+ // Load Env file
+ $dotenvPath = dirname(dirname(__DIR__));
+ 
+ $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+ $dotenv->load($dotenvPath);
+ define('NAMBDAT', $_ENV['NAMBDAT']);  
+ define('HOSBDAT',$_ENV['HOSBDAT']);
+ define('DBUSER',$_ENV['DBUSER']);
+ define('DBPASS',$_ENV['DBPASS']);
+ define('DBVERS',$_ENV['DBVERS']);
+ define('MANPATH','http://'.HOSBDAT);
+ 
+ 
+
+
+/*
  $env = new DotEnvEnvironment();
  $env->load(__DIR__ );
  
- $dbnm = getenv('NAMBDAT');
- $dbhs = getenv('HOSBDAT');
- $dbus = getenv('DBUSER');
- $dbvr = getenv('DBVERS');
+*/
+ /*
+    //  \Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . '/../../')->load();
+
+    \Dotenv\Dotenv::createUnsafeImmutable( __DIR__ .'/' )->load();
+
+  //  define('NAMBDAT', getenv('NAMBDAT'));  
+    define('HOSBDAT',getenv('HOSBDAT'));
+    define('DBUSER',getenv('DBUSER'));
+    define('DBPASS',getenv('DBPASS'));
+    define('DBVERS',getenv('DBVERS'));
+    define('MANPATH','http://'.HOSBDAT);
+    */
 
  // ENABLE ON LIVE SERVER
- // $dbps = getenv('DBPASS');
+ 
 
 # STRINGS
     // Project name
-    define('MAINAME','Acquarium');
+    define('MAINAME','Halfegg');
     // project domain (required)
-    define('PREFIX','acquarium');
+    define('PREFIX','halfegg');
     // project prefix (required)
-    define('SHPRFIX','acqrum');
+    define('SHPRFIX','hlfgg');
+    // database prefix
+    define('DBPRFX',SHPRFIX.'_');
     // project description
     define('DESCR','A customer Portal');
     // project version
     define('VERSION','0.0.7');
     
-# Database
-    #~  Name (required) 
-    define('NAMBDAT',$dbnm);
-    #~ prefix (don't edit)
-    define('DBPRFX',SHPRFIX.'_');
-    #~ host 
-    define('HOSBDAT','localhost');
-    #~ user (required)
-    define('DBUSER',$dbus);
-    #~ user password (required) USE $dbps var on live server !
-    define('DBPASS','');
-    #~ version
-    define('DBVERS',$dbvr);
-
-# TABLES (don't edit)
+# Database TABLES (don't edit)
     #~ users
     define('USERTB',DBPRFX.'users');
     #~ items
@@ -63,7 +78,7 @@ include_once(__DIR__.'/DotEnvEnvironment.php');
     define('HOMPATH',__DIR__);
     define('FILPATH',__FILE__);
     define('BASPATH',basename(HOMPATH));
-    define('MANPATH','http://'.HOSBDAT);
+    
     define('REGPATH','link.php');
     define('BACTIT','Backend dashboard'); 
     define('REGTIT','Registration Form');

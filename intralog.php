@@ -12,7 +12,8 @@ if(file_exists(__DIR__).'/config.php'){
  
     // Composer ClassMap
     require HOMPATH.'/vendor/autoload.php';		
-    
-
+  
+ 
+   // Start backend
     $t = new srcinit();	
     echo $t->admin(); 
