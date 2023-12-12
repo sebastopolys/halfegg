@@ -13,20 +13,15 @@ $mod = [
     //
     ['usuario','Nombre','text',null],
     ['apell','Apellido','text',null],
-    ['telefono','Telefono','text',null],  
-    ['ocupa','Ocupacion','text',null],
+    ['estciv','Estado civil','radio',
+        ['Casado','Soltero']
+    ],
+    ['calle','Calle','text',null],
+    ['nume','Numero','text',null],
+    ['locali','Localidad','text',null],
+    ['telefono','Telefono','text',null], 
     
     ['edad','Edad','number',null],
-        
-    ['suscrp','Suscripcion','radio',
-        ['Si','No']  
-    ],
-    ['metpag','Metodo de pago','select',
-        ['MP','Transferencia','Credito','Efectivo']
-    ],
-    ['gender','Sexo','radio',
-        ['M','F']    
-    ],
-    ['nota','Nota: ','text',null] 
+    ['naci','Nacionalidad','text',null]
 ];
 return $mod;

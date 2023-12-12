@@ -24,8 +24,10 @@ class installDatabase extends dataBaseConnect{
                     if(isset($_POST['inst_ddbb'])){
                         $this->create_database($dbname);
                         $this->insertOptions();
-                        echo " <br/>New DAtabase ($dbname) has been installed";
-                        
+                        echo " <br/>New DAtabase ($dbname) has been installed";                        
+                    } 
+                    if(isset($_POST['cancel_ddbb'])){
+                        die('Ok, you can come back later');
                     }
                     return TRUE;
                    

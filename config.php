@@ -6,7 +6,7 @@ use Dotenv\Dotenv;
 
 
  // Load Env file
- $dotenvPath = dirname(dirname(__DIR__));
+ $dotenvPath = dirname(dirname(dirname(__DIR__)));
  
  $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__));
  $dotenv->load($dotenvPath);
@@ -17,37 +17,15 @@ use Dotenv\Dotenv;
  define('DBVERS',$_ENV['DBVERS']);
  define('MANPATH','http://'.HOSBDAT);
  
+
  
-
-
-/*
- $env = new DotEnvEnvironment();
- $env->load(__DIR__ );
- 
-*/
- /*
-    //  \Dotenv\Dotenv::createUnsafeImmutable(__DIR__ . '/../../')->load();
-
-    \Dotenv\Dotenv::createUnsafeImmutable( __DIR__ .'/' )->load();
-
-  //  define('NAMBDAT', getenv('NAMBDAT'));  
-    define('HOSBDAT',getenv('HOSBDAT'));
-    define('DBUSER',getenv('DBUSER'));
-    define('DBPASS',getenv('DBPASS'));
-    define('DBVERS',getenv('DBVERS'));
-    define('MANPATH','http://'.HOSBDAT);
-    */
-
- // ENABLE ON LIVE SERVER
- 
-
 # STRINGS
     // Project name
-    define('MAINAME','Halfegg');
+    define('MAINAME','Promedic');
     // project domain (required)
-    define('PREFIX','halfegg');
+    define('PREFIX','promedic');
     // project prefix (required)
-    define('SHPRFIX','hlfgg');
+    define('SHPRFIX','prmdc');
     // database prefix
     define('DBPRFX',SHPRFIX.'_');
     // project description

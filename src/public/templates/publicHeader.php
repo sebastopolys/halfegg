@@ -21,6 +21,8 @@ class publicHeader{
         $h= '<html>
         <head>
             <title>'.$pref.'</title>';
+        
+        $h .= '<meta name="robots" content="noindex,follow" />';
        
         $h.= '<script src="'.MANPATH."/".BASPATH.'/scripts/JS/publicscript.js" async="" type="text/javascript"></script>';
  
