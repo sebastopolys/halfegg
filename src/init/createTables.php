@@ -1,59 +1,41 @@
-<?php
+<?php 
 namespace Halfegg\init;
 
-class installDatabase extends dataBaseConnect{
+class createTables extends dataBaseConnect{
 
     private static $dbname = NAMBDAT;
+    private static $tables = [USERTB,ITEMTB,OPTSTB,MTUSTB,MTITTB,USITRL,USMTRL,ITMTRL];
+ 
  
     public function __construct(){
 
         new dataBaseConnect();
+        
     }
 
-    public function check_database( ){
+    public function installTables( ){
+
         $dbname = self::$dbname;
-                $see = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$dbname'";  
-                if($this->query_database($see)===false){
-                    echo '<p>There is no database for this domain</p>';
-                    echo '<p>Ensure the completion of installation procedure before installing database</p>';
-                    echo '<p>¿Install database now?</p>';
-                    echo '<form method="post">
-                    <input type="submit" value="INSTALL" name="inst_ddbb">
-                    <input type="submit" value="CANCEL" name="cancel_ddbb">
-                    </form>';
-                    if(isset($_POST['inst_ddbb'])){
-                        $this->create_database($dbname);
-                        $this->insertOptions();
-                        echo " <br/>New DAtabase ($dbname) has been installed";                        
-                    } 
-                    if(isset($_POST['cancel_ddbb'])){
-                        die('Ok, you can come back later');
-                    }
-                    return TRUE;
                    
-                }
-                // echo 'Database is Ok.';
+            if(isset($_POST['inst_ddbb'])){
+
+                $this->create_tables($dbname,self::$tables);  
+                $this->insertOptions();
+                return TRUE;
+
+            } else {
+
                 return FALSE;
-            
-         
-    }
- 
-    #  create database 
-    private function create_database($dbname){
 
-        $tables = [USERTB,ITEMTB,OPTSTB,MTUSTB,MTITTB,USITRL,USMTRL,ITMTRL];
+            }
 
-        $quer = "CREATE DATABASE IF NOT EXISTS $dbname";
-        $f = parent::$_conn->exec($quer );
-        $this->create_tables($dbname,$tables);
-         
     }
 
     # create tables
     private function create_tables($dbname,$tables){
     
         #~ USERS
-        $stats = ['CREATE TABLE '.$dbname.'.'.$tables[0].'( 
+        $stats = ['CREATE TABLE IF NOT EXISTS '.$dbname.'.'.$tables[0].'( 
             id INT AUTO_INCREMENT,
             username VARCHAR(100) NULL, 
             email VARCHAR(50) NULL, 
@@ -65,7 +47,7 @@ class installDatabase extends dataBaseConnect{
             PRIMARY KEY(id)
         );',
         #~ ITEMS
-        'CREATE TABLE '.$dbname.'.'.$tables[1].'( 
+        'CREATE TABLE IF NOT EXISTS '.$dbname.'.'.$tables[1].'( 
             id INT AUTO_INCREMENT,            
             name VARCHAR(100) NULL, 
             type VARCHAR(150) NULL,
@@ -79,7 +61,7 @@ class installDatabase extends dataBaseConnect{
             PRIMARY KEY(id)
         );',
         #~ OPTIONS
-        'CREATE TABLE '.$dbname.'.'.$tables[2].'( 
+        'CREATE TABLE IF NOT EXISTS '.$dbname.'.'.$tables[2].'( 
             id INT AUTO_INCREMENT,
             label VARCHAR(50) NOT NULL, 
             value VARCHAR(100) NULL,
@@ -89,7 +71,7 @@ class installDatabase extends dataBaseConnect{
             PRIMARY KEY(id)
         );',
         #~ META_USERS
-        'CREATE TABLE '.$dbname.'.'.$tables[3].'( 
+        'CREATE TABLE IF NOT EXISTS '.$dbname.'.'.$tables[3].'( 
             id INT AUTO_INCREMENT,            
             label VARCHAR(50) NOT NULL,            
             value VARCHAR(2500) NULL,            
@@ -98,7 +80,7 @@ class installDatabase extends dataBaseConnect{
             PRIMARY KEY(id)
         );',
         #~ META_ITEMS
-        'CREATE TABLE '.$dbname.'.'.$tables[4].'( 
+        'CREATE TABLE IF NOT EXISTS '.$dbname.'.'.$tables[4].'( 
             id INT AUTO_INCREMENT,            
             label VARCHAR(50) NOT NULL,            
             value VARCHAR(2500) NULL,            
@@ -107,7 +89,7 @@ class installDatabase extends dataBaseConnect{
             PRIMARY KEY(id)
         );',
         #~ USER - ITEMS RELATION
-        'CREATE TABLE '.$dbname.'.'.$tables[5].'( 
+        'CREATE TABLE IF NOT EXISTS '.$dbname.'.'.$tables[5].'( 
             id INT AUTO_INCREMENT,
             type VARCHAR(20),     
             user_id INT(10),
@@ -118,7 +100,7 @@ class installDatabase extends dataBaseConnect{
             PRIMARY KEY(id)
         );',
         #~ USER - META_USER RELATION
-        'CREATE TABLE '.$dbname.'.'.$tables[6].'( 
+        'CREATE TABLE IF NOT EXISTS '.$dbname.'.'.$tables[6].'( 
             id INT AUTO_INCREMENT,
             type VARCHAR(20), 
             user_id INT(10),
@@ -129,7 +111,7 @@ class installDatabase extends dataBaseConnect{
             PRIMARY KEY(id)
         );',
         #~ ITEMS - META_ITEMS RELATION
-        'CREATE TABLE '.$dbname.'.'.$tables[7].'( 
+        'CREATE TABLE IF NOT EXISTS '.$dbname.'.'.$tables[7].'( 
             id INT AUTO_INCREMENT,
             type VARCHAR(20),
             item_id INT(10),
@@ -143,49 +125,40 @@ class installDatabase extends dataBaseConnect{
         foreach ($stats as $stat) {
             parent::$_conn->exec($stat );
         }       
- 
-    }    
+        return;
+    }
+
+        # Insert constants in options table
+
+        public function insertOptions(){
+
+            $tab = OPTSTB;
     
-    #  Build Single Query 
-    private function query_database($quer){
-
-        $q = parent::$_conn->prepare($quer);
-            $q->execute();
-       
-            return $q->fetch();
-
-    }
-
-    # Insert constants in options table
-
-    public function insertOptions(){
-
-        $tab = OPTSTB;
-
-        $data = [
-            ['abspath',ABSPATH ],
-            ['hompath',HOMPATH ],
-            ['baspath',BASPATH ],
-            ['manpath',MANPATH ],
-            ['prefix',PREFIX],
-            ['shprfix',SHPRFIX],
-            ['currmod',CURRMOD]
-        ];
- 
-        $dbname = self::$dbname;
-        $see="INSERT INTO $dbname.`$tab` (`label`, `value`,`last_action`,`created_at` ) 
-        VALUES (?,?,CURRENT_DATE(),CURRENT_DATE()) ";
-
-        $stmt = parent::$_conn->prepare($see);
-
-        foreach ($data as $row) {            
-           $stmt->execute($row);  
-        }  
-
-    }
-
+            $data = [
+                ['abspath',ABSPATH ],
+                ['hompath',HOMPATH ],
+                ['baspath',BASPATH ],
+                ['manpath',MANPATH ],
+                ['prefix',PREFIX],
+                ['shprfix',SHPRFIX],
+                ['currmod',CURRMOD],
+                ['installer',1]
+            ];
      
+            $dbname = self::$dbname;
+            $soo="INSERT INTO $dbname.`$tab` (`label`, `value`,`last_action`,`created_at` ) 
+            VALUES (?,?,CURRENT_DATE(),CURRENT_DATE()) ";
     
+            $stmt = parent::$_conn->prepare($soo);
+    
+            foreach ($data as $row) {            
+               $stmt->execute($row);  
+            }  
+    
+        }
+    
+   
+
     # CLOSE CONECTION
     public function __destruct(){
 

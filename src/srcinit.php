@@ -1,6 +1,6 @@
 <?php
 namespace Halfegg;
-use Halfegg\init\installDatabase;
+use Halfegg\init\installer;
 use Halfegg\public\log\publicLog;
 use Halfegg\admin\log\adminLog;
 
@@ -16,8 +16,14 @@ class srcinit{
     }
     public function public(){
         
-        $in = new installDatabase();
-        if($in->check_database()==FALSE){        
+        if (! isset($_SERVER['HTTPS']) or $_SERVER['HTTPS'] == 'off' ) {
+            $redirect_url = "https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            header("Location: $redirect_url");
+            exit();
+        }
+        
+        $in = new installer();
+        if($in->check_db()==FALSE){        
             $p = new publicLog();
             return $p->run_public();
         }
